@@ -1,0 +1,10 @@
+palettes:
+    main: examples/platformer/assets/main.palette
+tiles:
+    '#': examples/platformer/assets/brick.tile
+    '$': examples/platformer/assets/block.tile
+sprites:
+    player: examples/platformer/assets/player.spr
+    heart: examples/platformer/assets/heart.spr
+backgrounds:
+    platforms: examples/platformer/assets/background.map
