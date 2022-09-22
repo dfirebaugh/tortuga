@@ -6,11 +6,12 @@ import (
 	"tortuga/pkg/tortuga"
 )
 
-type cart struct{}
+type cart struct {
+	input input.PlayerInput
+}
 
 var (
 	game  = tortuga.New()
-	i     = input.Keyboard{}
 	rect  = geom.MakeRect(float64(game.GetScreenWidth()/2-10), float64(game.GetScreenHeight()/2-10), 20, 20)
 	rect1 = geom.MakeRect(float64(game.GetScreenWidth()/2-10), float64(game.GetScreenHeight()/2-10), 20, 20)
 )
@@ -20,16 +21,16 @@ const (
 )
 
 func (c cart) Update() {
-	if i.IsDownPressed() {
+	if c.input.IsDownPressed() {
 		rect1[1] += speed
 	}
-	if i.IsUpPressed() {
+	if c.input.IsUpPressed() {
 		rect1[1] -= speed
 	}
-	if i.IsLeftPressed() {
+	if c.input.IsLeftPressed() {
 		rect1[0] -= speed
 	}
-	if i.IsRightPressed() {
+	if c.input.IsRightPressed() {
 		rect1[0] += speed
 	}
 }
@@ -48,5 +49,7 @@ func (c cart) Render() {
 }
 
 func main() {
-	game.Run(cart{})
+	game.Run(cart{
+		input: input.Keyboard{},
+	})
 }
