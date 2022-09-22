@@ -47,7 +47,7 @@ func New(game tortuga.Console, input input.PlayerInput, s sprite.Sprite, collida
 }
 
 func (p *player) Render() {
-	p.hitbox.Render(p.game.GetDisplay(), p.game.Color(1))
+	p.hitbox.Draw(p.game.GetDisplay(), p.game.Color(1))
 	if p.input.IsLeftPressed() {
 		p.DrawPixels(p.game.GetDisplay(), p.GetPixels(0, 0), p.X, p.Y)
 		return

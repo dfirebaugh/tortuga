@@ -53,7 +53,7 @@ func (c Console) RenderPalette() {
 		geom.MakeRect(
 			float64(i)*size,
 			float64(c.GetScreenHeight())-size, size, size).
-			Render(c.GetDisplay(), c.Color(uint8(i)))
+			Filled(c.GetDisplay(), c.Color(uint8(i)))
 	}
 }
 

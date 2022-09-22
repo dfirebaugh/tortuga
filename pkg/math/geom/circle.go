@@ -21,7 +21,15 @@ func MakeCircle(x, y, r float64) Circle {
 	}
 }
 
-func (c Circle) Render(d displayer, clr color.Color) {
+func (c Circle) Draw(d displayer, clr color.Color) {
+	color, ok := clr.(color.RGBA)
+	if !ok {
+		color = colornames.Black
+	}
+	tinydraw.Circle(d, int16(c.X), int16(c.Y), int16(c.R*2), color)
+}
+
+func (c Circle) Filled(d displayer, clr color.Color) {
 	color, ok := clr.(color.RGBA)
 	if !ok {
 		color = colornames.Black

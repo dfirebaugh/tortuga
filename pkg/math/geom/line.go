@@ -13,7 +13,7 @@ type Point struct {
 	Y float64
 }
 
-func (p Point) Render(d displayer, clr uint8) {
+func (p Point) Draw(d displayer, clr uint8) {
 	d.Put(int16(p.X), int16(p.Y), clr)
 }
 
@@ -63,7 +63,7 @@ func (l Line) Intersection(l2 Line) (Point, error) {
 	return Point{x, y}, nil
 }
 
-func (l Line) Render(d displayer, clr color.Color) {
+func (l Line) Draw(d displayer, clr color.Color) {
 	color, ok := clr.(color.RGBA)
 	if !ok {
 		color = colornames.Black
