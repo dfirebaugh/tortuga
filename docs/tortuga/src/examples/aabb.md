@@ -10,9 +10,9 @@
 package main
 
 import (
-	"tortuga/pkg/input"
-	"tortuga/pkg/math/geom"
-	"tortuga/pkg/tortuga"
+	"github.com/dfirebaugh/tortuga/pkg/input"
+	"github.com/dfirebaugh/tortuga/pkg/math/geom"
+	"github.com/dfirebaugh/tortuga"
 )
 
 type cart struct {

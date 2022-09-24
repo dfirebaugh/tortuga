@@ -1,0 +1,12 @@
+# Sprite
+Sprite files are similar to tile files.
+The main difference is that you can build out a sprite file to represent named sprite animations.
+
+### Example
+
+```yaml
+idle:
+    - 1111110011111111f6ff6f00ffffff000ccc00000111000001010000000000001111110011111111f6ff6f00ffffff000ccc0000011100000101000000000000
+    - 3333330033333333f6ff6f00ffffff000ccc00000333000003030000000000003333330033333333f6ff6f00ffffff000ccc0000033300000303000000000000
+```
+> yaml format

@@ -2,15 +2,16 @@ package main
 
 import (
 	"strings"
-	"tortuga/examples/platformer/assets"
-	"tortuga/examples/platformer/consumable"
-	"tortuga/examples/platformer/heart"
-	"tortuga/examples/platformer/player"
-	"tortuga/pkg/entity"
-	"tortuga/pkg/input"
-	"tortuga/pkg/math/geom"
-	"tortuga/pkg/sprite"
-	"tortuga/pkg/tortuga"
+
+	"github.com/dfirebaugh/tortuga"
+	"github.com/dfirebaugh/tortuga/examples/platformer/assets"
+	"github.com/dfirebaugh/tortuga/examples/platformer/consumable"
+	"github.com/dfirebaugh/tortuga/examples/platformer/heart"
+	"github.com/dfirebaugh/tortuga/examples/platformer/player"
+	"github.com/dfirebaugh/tortuga/pkg/entity"
+	"github.com/dfirebaugh/tortuga/pkg/input"
+	"github.com/dfirebaugh/tortuga/pkg/math/geom"
+	"github.com/dfirebaugh/tortuga/pkg/sprite"
 )
 
 type cart struct{}

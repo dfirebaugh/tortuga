@@ -1,30 +1,9 @@
-# Cart
-A cart (aka a game cartridge) is a representation of game code and memory.
-
-A cart should implement the `tortuga.Cart` interface.
-
-```go
-type Cart interface {
-    Update()
-    Render()
-}
-```
-
-> Note: that some methods can only be called in the `Render` function e.g. most calls that deal with drawing things.
-
-The most simple implementation of this would look like the following:
-
-<wasm-view height=400 width=530 src="simple.wasm"></wasm-view>
-
-> note: click the canvas to control the rect with WASD
-
-```go
 package main
 
 import (
+	"github.com/dfirebaugh/tortuga"
 	"github.com/dfirebaugh/tortuga/pkg/input"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
-	"github.com/dfirebaugh/tortuga"
 )
 
 type cart struct {
@@ -72,4 +51,3 @@ func main() {
 		input: input.Keyboard{},
 	})
 }
-```

@@ -1,7 +1,7 @@
 package consumable
 
 import (
-	"tortuga/pkg/math/geom"
+	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 )
 
 type Consumable interface {

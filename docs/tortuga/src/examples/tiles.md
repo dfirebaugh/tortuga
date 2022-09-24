@@ -5,7 +5,7 @@
 ```golang
 package main
 
-import "tortuga/pkg/tortuga"
+import "github.com/dfirebaugh/tortuga"
 
 type cart struct{}
 

@@ -2,12 +2,13 @@ package player
 
 import (
 	"fmt"
-	"tortuga/examples/platformer/consumable"
-	"tortuga/pkg/component"
-	"tortuga/pkg/input"
-	"tortuga/pkg/math/geom"
-	"tortuga/pkg/sprite"
-	"tortuga/pkg/tortuga"
+
+	"github.com/dfirebaugh/tortuga"
+	"github.com/dfirebaugh/tortuga/examples/platformer/consumable"
+	"github.com/dfirebaugh/tortuga/pkg/component"
+	"github.com/dfirebaugh/tortuga/pkg/input"
+	"github.com/dfirebaugh/tortuga/pkg/math/geom"
+	"github.com/dfirebaugh/tortuga/pkg/sprite"
 )
 
 type player struct {

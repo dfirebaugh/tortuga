@@ -2,7 +2,8 @@ package emulator
 
 import (
 	"image/color"
-	"tortuga/internal/emulator/devices/display"
+
+	"github.com/dfirebaugh/tortuga/internal/emulator/devices/display"
 )
 
 type (

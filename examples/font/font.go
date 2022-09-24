@@ -1,6 +1,6 @@
 package main
 
-import "tortuga/pkg/tortuga"
+import "github.com/dfirebaugh/tortuga"
 
 var console tortuga.Console
 

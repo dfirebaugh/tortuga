@@ -2,7 +2,8 @@ package wad
 
 import (
 	"io/ioutil"
-	"tortuga/pkg/sprite"
+
+	"github.com/dfirebaugh/tortuga/pkg/sprite"
 
 	"github.com/sirupsen/logrus"
 )

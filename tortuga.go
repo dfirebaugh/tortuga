@@ -2,17 +2,17 @@ package tortuga
 
 import (
 	"image/color"
-	"tortuga/config"
-	"tortuga/internal/emulator"
-	"tortuga/internal/emulator/devices/clock"
-	"tortuga/internal/emulator/devices/font"
-	"tortuga/internal/emulator/devices/ppu"
-	"tortuga/internal/emulator/devices/ppu/palette"
-	"tortuga/internal/emulator/devices/tilememory"
-	"tortuga/internal/emulator/devices/vram"
-	"tortuga/internal/engine"
-	"tortuga/pkg/math/geom"
 
+	"github.com/dfirebaugh/tortuga/config"
+	"github.com/dfirebaugh/tortuga/internal/emulator"
+	"github.com/dfirebaugh/tortuga/internal/emulator/devices/clock"
+	"github.com/dfirebaugh/tortuga/internal/emulator/devices/font"
+	"github.com/dfirebaugh/tortuga/internal/emulator/devices/ppu"
+	"github.com/dfirebaugh/tortuga/internal/emulator/devices/ppu/palette"
+	"github.com/dfirebaugh/tortuga/internal/emulator/devices/tilememory"
+	"github.com/dfirebaugh/tortuga/internal/emulator/devices/vram"
+	"github.com/dfirebaugh/tortuga/internal/engine"
+	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 	"tinygo.org/x/tinyfont/proggy"
 )
 
