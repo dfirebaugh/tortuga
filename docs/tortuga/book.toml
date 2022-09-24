@@ -12,5 +12,5 @@ git-repository-url = "https://github.com/dfirebaugh/tortuga"
 git-repository-icon = "fa-github"
 edit-url-template = "https://github.com/dfirebaugh/tortuga/edit/main/docs/tortuga/{path}"
 site-url = "/tortuga/"
-additional-js = ["wasm-view.js", "wasm_exec.js"]
+additional-js = ["wasm-view.js"]
 
