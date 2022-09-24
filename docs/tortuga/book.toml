@@ -4,3 +4,13 @@ language = "en"
 multilingual = false
 src = "src"
 title = "tortuga"
+
+
+[output.html]
+default-theme="coal"
+git-repository-url = "https://github.com/dfirebaugh/tortuga"
+git-repository-icon = "fa-github"
+edit-url-template = "https://github.com/dfirebaugh/tortuga/edit/main/docs/tortuga/{path}"
+site-url = "/tortuga/"
+additional-js = ["wasm-view.js", "wasm_exec.js"]
+
