@@ -6,4 +6,6 @@
 - [WAD](./wad.md)
 - [Palette](./palette.md)
 # Examples
-- [Axis Aligned Collisions](./aabb.md)
+- [Axis Aligned Collisions](./examples/aabb.md)
+- [Text](./examples/text.md)
+- [Tiles](./examples/tiles.md)

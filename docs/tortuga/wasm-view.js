@@ -13,7 +13,8 @@ export default class WASMView extends LitElement {
         doc.open()
         doc.write(`
         <!DOCTYPE html>
-        <script src="./wasm_exec.js"></script>
+        <script src="/wasm_exec.js"></script>
+
         <script>
         // Polyfill
         if (!WebAssembly.instantiateStreaming) {

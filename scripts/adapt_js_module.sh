@@ -6,6 +6,7 @@
 function wasmJSModuleAdapter() {
     cd .dist/web/
     find . -type f \( -iname "*.html" -o -iname "*.html" \) -exec sed -i 's#<script type="text/javascript" src="wasm-view.js"></script>#<script type="module" src="wasm-view.js"></script>#' '{}' +
+    find . -type f \( -iname "*.html" -o -iname "*.html" \) -exec sed -i 's#<script type="text/javascript" src="../wasm-view.js"></script>#<script type="module" src="../wasm-view.js"></script>#' '{}' +
     cd ../..
 }
 

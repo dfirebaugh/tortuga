@@ -1,7 +1,7 @@
 # Axis Aligned Collisions
 
 
-<wasm-view src="aabb.wasm"></wasm-view>
+<wasm-view height=400 width=530 src="aabb.wasm"></wasm-view>
 
 > note: click the canvas to control the rect with WASD
 
