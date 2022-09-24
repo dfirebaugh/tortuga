@@ -5,4 +5,5 @@
 - [Geometry](./geometry.md)
 - [WAD](./wad.md)
 - [Palette](./palette.md)
-- [Examples](./examples.md)
+# Examples
+- [Axis Aligned Collisions](./aabb.md)
