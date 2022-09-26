@@ -9,6 +9,7 @@
 - [Map](./assets/map.md)
 - [Sprite](./assets/sprite.md)
 # Examples
-- [Axis Aligned Collisions](./examples/aabb.md)
 - [Text](./examples/text.md)
 - [Tiles](./examples/tiles.md)
+- [Axis Aligned Collisions](./examples/aabb.md)
+- [Swept AABB](./examples/sweptaabb.md)

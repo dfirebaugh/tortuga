@@ -3,7 +3,6 @@ module github.com/dfirebaugh/tortuga
 go 1.19
 
 require (
-	github.com/atedja/go-vector v0.0.0-20170318030839-a887ff7bead7
 	github.com/hajimehoshi/ebiten/v2 v2.4.4
 	github.com/sirupsen/logrus v1.9.0
 	golang.org/x/image v0.0.0-20220902085622-e7cb96979f69

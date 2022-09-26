@@ -1,10 +1,15 @@
 # Axis Aligned Collisions
 
 
+> you can run this locally with the following command
+
+```
+go run github.com/dfirebaugh/tortuga/examples/aabb
+```
+
 <wasm-view height=400 width=530 src="aabb.wasm"></wasm-view>
 
 > note: click the canvas to control the rect with WASD
-
 
 ```golang
 package main

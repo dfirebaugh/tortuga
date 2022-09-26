@@ -12,7 +12,15 @@ type Cart interface {
 
 > Note: that some methods can only be called in the `Render` function e.g. most calls that deal with drawing things.
 
+## Example
+
 The most simple implementation of this would look like the following:
+
+> you can run this example locally with the following command
+
+```
+go run github.com/dfirebaugh/tortuga/examples/simple
+```
 
 <wasm-view height=400 width=530 src="simple.wasm"></wasm-view>
 

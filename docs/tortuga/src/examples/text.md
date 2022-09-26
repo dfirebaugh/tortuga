@@ -1,6 +1,13 @@
 # Text
 
+> you can run this locally with the following command
+
+```
+go run github.com/dfirebaugh/tortuga/examples/font
+```
+
 <wasm-view height=400 width=530 src="font.wasm"></wasm-view>
+
 
 ```golang
 package main

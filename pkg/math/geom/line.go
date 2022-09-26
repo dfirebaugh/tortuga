@@ -8,15 +8,6 @@ import (
 	"tinygo.org/x/tinydraw"
 )
 
-type Point struct {
-	X float64
-	Y float64
-}
-
-func (p Point) Draw(d displayer, clr uint8) {
-	d.Put(int16(p.X), int16(p.Y), clr)
-}
-
 type Segment struct {
 	v0 Vector
 	v1 Vector
@@ -26,10 +17,6 @@ type Line struct {
 	slope   float64
 	yint    float64
 	segment Segment
-}
-
-func MakePoint(x, y float64) Point {
-	return Point{X: x, Y: y}
 }
 
 func MakeLine(a, b Point) Line {
