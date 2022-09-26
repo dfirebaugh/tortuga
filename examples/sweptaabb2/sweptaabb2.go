@@ -136,6 +136,12 @@ func main() {
 			15,
 			15,
 		))
+		rects = append(rects, geom.MakeRect(
+			float64(i*game.GetScreenWidth()/15),
+			float64(game.GetScreenHeight()-20),
+			15,
+			15,
+		))
 	}
 	game.Run(cart{})
 }
