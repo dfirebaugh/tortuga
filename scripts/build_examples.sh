@@ -7,6 +7,8 @@ env GOOS=js GOARCH=wasm go build -o ./.dist/examples/font.wasm ./examples/font/
 env GOOS=js GOARCH=wasm go build -o ./.dist/examples/tiles.wasm ./examples/tiles/
 env GOOS=js GOARCH=wasm go build -o ./.dist/examples/sweptaabb.wasm ./examples/sweptaabb/
 env GOOS=js GOARCH=wasm go build -o ./.dist/examples/sweptaabb2.wasm ./examples/sweptaabb2/
+env GOOS=js GOARCH=wasm go build -o ./.dist/examples/staticball.wasm ./examples/staticball/
+env GOOS=js GOARCH=wasm go build -o ./.dist/examples/dynamicball.wasm ./examples/dynamicball/
 cp .dist/examples/* .dist/web/
 cp .dist/examples/* .dist/web/examples/
 

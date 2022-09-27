@@ -2,6 +2,7 @@ package geom
 
 import (
 	"image/color"
+	"math"
 
 	"golang.org/x/image/colornames"
 	"tinygo.org/x/tinydraw"
@@ -19,6 +20,14 @@ func MakeCircle(x, y, r float64) Circle {
 		Y: y,
 		R: r,
 	}
+}
+
+func (c Circle) HasOverlap(other Circle) bool {
+	return math.Abs((c.X-other.X)*(c.X-other.X)+(c.Y-other.Y)*(c.Y-other.Y)) <= ((c.R * other.R) * (c.R * other.R))
+}
+
+func (c Circle) ContainsPoint(p Point) bool {
+	return math.Abs((c.X-p.X)*(c.X-p.X)+(c.Y-p.Y)*(c.Y-p.Y)) < ((c.R * 2) * (c.R * 2))
 }
 
 func (c Circle) Draw(d displayer, clr color.Color) {
