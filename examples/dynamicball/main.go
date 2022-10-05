@@ -34,7 +34,6 @@ func (c cart) Render() {
 	for _, ball := range balls {
 		ball.Render()
 	}
-
 }
 
 func generateBallsAt(n int, x float64, y float64) {
