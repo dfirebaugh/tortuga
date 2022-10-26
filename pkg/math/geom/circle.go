@@ -23,7 +23,8 @@ func MakeCircle(x, y, r float64) Circle {
 }
 
 func (c Circle) HasOverlap(other Circle) bool {
-	return math.Abs((c.X-other.X)*(c.X-other.X)+(c.Y-other.Y)*(c.Y-other.Y)) <= ((c.R * other.R) * (c.R * other.R))
+	return math.Pow((c.X-other.X), 2)+math.Pow((c.Y-other.Y), 2) <=
+		math.Pow(2*(c.R+other.R), 2)
 }
 
 func (c Circle) ContainsPoint(p Point) bool {
