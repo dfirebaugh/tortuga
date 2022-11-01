@@ -36,6 +36,55 @@ func Unmarshal(b []byte, s *Sprite) {
 	}
 }
 
+func Encode(spriteNums []uint8) string {
+	result := ""
+	for _, c := range spriteNums {
+		n := ""
+		switch c {
+		case 0:
+			n = "0"
+		case 1:
+			n = "1"
+		case 2:
+			n = "2"
+		case 3:
+			n = "3"
+		case 4:
+			n = "4"
+		case 5:
+			n = "5"
+		case 6:
+			n = "6"
+		case 7:
+			n = "7"
+		case 8:
+			n = "8"
+		case 9:
+			n = "9"
+		case 10:
+			n = "a"
+		case 11:
+			n = "b"
+		case 12:
+			n = "c"
+		case 13:
+			n = "d"
+		case 14:
+			n = "e"
+		case 15:
+			n = "f"
+		}
+
+		result += n
+	}
+
+	return result
+}
+
+func Decode(spriteString string) (pixels []uint8) {
+	return Parse(spriteString)
+}
+
 func Parse(spriteString string) (pixels []uint8) {
 	s := strings.ReplaceAll(strings.ReplaceAll(spriteString, "\n", ""), "\t", "")
 	for _, c := range strings.Split(s, "") {
@@ -134,6 +183,10 @@ func (s Sprite) DrawPixels(d displayer, pixels []uint8, x float64, y float64) {
 func (s Sprite) Draw(d displayer, animationIndex int, x float64, y float64) {
 	if s.Width == 0 {
 		s.Width = 8
+	}
+
+	if len(s.Animations) == 0 {
+		return
 	}
 	frameIndex := int(time.Now().Unix()) % len(s.Animations[animationIndex])
 	for i, pixel := range s.Animations[animationIndex][frameIndex] {
