@@ -48,6 +48,9 @@ func (i InputController) Update() {
 	}
 
 	if ebiten.IsKeyPressed(ebiten.KeyControl) && inpututil.IsKeyJustPressed(ebiten.KeyS) {
+		if i.MessageBus == nil {
+			return
+		}
 		i.MessageBus.Publish(message.Message{
 			Topic: topic.SAVE,
 		})

@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/dfirebaugh/tortuga"
+	"github.com/dfirebaugh/tortuga/cmd/spritely/internal/file"
 	"github.com/dfirebaugh/tortuga/cmd/spritely/internal/topic"
 	"github.com/dfirebaugh/tortuga/pkg/component"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
@@ -156,6 +157,9 @@ func (f *Frames) Mailbox() {
 			f.isPlaying = false
 			f.switchFrame(0)
 			close(quit)
+
+		case topic.SAVE.String():
+			file.Save(f.Frames)
 		}
 	}
 }
