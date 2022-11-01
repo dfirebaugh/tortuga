@@ -4,6 +4,7 @@ import (
 	"github.com/dfirebaugh/tortuga"
 	"github.com/dfirebaugh/tortuga/cmd/spritely/internal/topic"
 	"github.com/dfirebaugh/tortuga/pkg/component"
+	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 	"github.com/dfirebaugh/tortuga/pkg/message"
 	"github.com/dfirebaugh/tortuga/pkg/tile"
 )
@@ -11,33 +12,54 @@ import (
 type ToolBar struct {
 	Game tortuga.Console
 	component.Coordinate
-	MessageBus message.MessageBus
-	Width      int
-	PixelSize  float64
-	isPlaying  bool
+	MessageBus  message.MessageBus
+	Width       int
+	PixelSize   float64
+	isPlaying   bool
+	currentTool int
 }
 
 func (t *ToolBar) Render() {
-	play := tile.Decode("7737777770330007703330077033330770333307703330077033000777377777")
+	play := tile.Decode("7737777772332227723332277233332772333327723332277233222777377777")
 	if t.isPlaying {
 		play = tile.Decode("7737777776336667763336677633336776333367763336677633666777377777")
 	}
-	play.X = 0
-	play.Y = 130
-	play.PixelSize = t.PixelSize
-	play.Draw(t.Game.GetDisplay())
-	stop := tile.Decode("7777777770000007708888077088880770888807708888077000000777777777")
-	// 7777777776666667768888677688886776888867768888677666666777777777
-	stop.X = float64(t.Width) * t.PixelSize
-	stop.Y = 130
-	stop.PixelSize = t.PixelSize
-	stop.Draw(t.Game.GetDisplay())
+
+	stop := tile.Decode("7777777772222227728888277288882772888827728888277222222777777777")
+	save := tile.Decode("22222222d56666d2d566d6ddd56666ddddddddddd777777dd777777dd222222d")
+	pencil := tile.Decode("22222ee22222d1ee2229adae229a9ad229a9a9224a9a9222f4a922220f422222")
+	bucket := tile.Decode("22022222202021122020011e220601ee206760ee0677760e2067602e22060222")
+	hand := tile.Decode("2222222207070702070707020777776007777760077777600777770200000022")
+	// key := tile.Decode("aaaaaa22a2222a22aaaaaa2222a2222222aa222222aaa22222a2222222aaa222")
+
+	tiles := []tile.Tile{}
+	tiles = append(tiles, play)
+	tiles = append(tiles, stop)
+	tiles = append(tiles, pencil)
+	tiles = append(tiles, bucket)
+	tiles = append(tiles, hand)
+	tiles = append(tiles, save)
+	// tiles = append(tiles, key)
+
+	for i, tile := range tiles {
+		tile.X = float64(t.Width) * t.PixelSize * float64(i)
+		tile.Y = 130
+		tile.PixelSize = t.PixelSize
+		tile.Draw(t.Game.GetDisplay())
+	}
+	geom.MakeRect(
+		float64(t.currentTool*t.Width*int(t.PixelSize))+t.X,
+		t.Y,
+		t.PixelSize*float64(t.Width),
+		t.PixelSize*float64(t.Width),
+	).
+		Draw(t.Game.GetDisplay(), t.Game.Color(7))
 }
 func (t ToolBar) Update() {}
 
 // IsWithinBounds will determine if a coordinate exists within the widget.
 func (t ToolBar) IsWithinBounds(coordinate component.Coordinate) bool {
-	if coordinate.X <= t.X || coordinate.X >= t.X+float64(t.Width*int(t.PixelSize))*float64(2) {
+	if coordinate.X <= t.X || coordinate.X >= t.X+float64(t.Width*int(t.PixelSize))*float64(6) {
 		return false
 	}
 	if coordinate.Y <= t.Y || coordinate.Y >= t.Y+float64(t.Width*int(t.PixelSize)) {
@@ -52,19 +74,9 @@ func (t *ToolBar) SelectElement(coordinate component.Coordinate) {
 		return
 	}
 
-	// for _, tool := range t.Tools {
-	// 	tool.ClickHandler()
-	// }
 	x := (coordinate.X - t.X) / t.PixelSize
-	// // y := (coordinate.Y - t.Y) / t.PixelSize
 
-	// if t.Broker == nil {
-	// 	return
-	// }
-	// t.Broker.Publish(message.Message{
-	// 	Topic:   topic.PUSH_PIXELS,
-	// 	Payload: sprite.Encode(t.Tools[t.currentFrame]),
-	// })
+	t.currentTool = int(x) / t.Width
 
 	switch int(x) / t.Width {
 	case 0:
@@ -80,9 +92,6 @@ func (t *ToolBar) SelectElement(coordinate component.Coordinate) {
 			Topic: topic.STOP_ANIMATION,
 		})
 	}
-
-	// t.currentFrame = int(x) / t.Width
-	// println(int(x) / t.Width)
 }
 
 // SelectElement will Set the element at the passed in coordinates to the active element.
@@ -101,17 +110,6 @@ func (t *ToolBar) Mailbox() {
 	for {
 		m := <-msg
 		switch m.GetTopic() {
-		// case topic.SET_CURRENT_COLOR.String():
-		// 	if clr, ok := m.GetPayload().(uint8); ok {
-		// 		t.currentColor = clr
-		// 	}
-		// case topic.SET_PIXEL.String():
-		// 	if i, ok := m.GetPayload().(int); ok {
-		// 		if len(t.Frames[t.currentFrame]) < i || i >= len(t.Frames[t.currentFrame]) {
-		// 			break
-		// 		}
-		// 		t.Frames[t.currentFrame][i] = t.currentColor
-		// 	}
 		}
 	}
 }
