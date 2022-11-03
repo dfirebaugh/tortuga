@@ -1,0 +1,7 @@
+palettes:
+    main: ./cmd/mapviewer/examples/main.palette
+tiles:
+    '#': ./cmd/mapviewer/examples/brick.tile
+    '$': ./cmd/mapviewer/examples/block.tile
+backgrounds:
+    tiles: ./cmd/mapviewer/examples/background.map
