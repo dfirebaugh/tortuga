@@ -1,9 +1,12 @@
 package main
 
 import (
+	"flag"
+
 	"github.com/dfirebaugh/tortuga"
 	"github.com/dfirebaugh/tortuga/cmd/spritely/internal/canvas"
 	"github.com/dfirebaugh/tortuga/cmd/spritely/internal/cursor"
+	"github.com/dfirebaugh/tortuga/cmd/spritely/internal/file"
 	"github.com/dfirebaugh/tortuga/cmd/spritely/internal/frames"
 	"github.com/dfirebaugh/tortuga/cmd/spritely/internal/inputcontroller"
 	"github.com/dfirebaugh/tortuga/cmd/spritely/internal/palette"
@@ -22,6 +25,8 @@ type cart struct {
 	Entities        []entity.Entity
 	InputController inputcontroller.InputController
 }
+
+var spriteFile string
 
 func (c cart) Render() {
 	c.Game.Clear()
@@ -69,6 +74,14 @@ func initEntities(game tortuga.Console) []entity.Entity {
 			Y: 160,
 		},
 	}
+	var animations [][][]uint8
+	if spriteFile != "" {
+		animations = file.Load(spriteFile)
+	}
+
+	if len(animations) > 0 {
+		animationFrames.Frames = animations[0]
+	}
 
 	toolbar := &toolbar.ToolBar{
 		Game:       game,
@@ -104,13 +117,19 @@ func initEntities(game tortuga.Console) []entity.Entity {
 			widgets = append(widgets, w)
 		}
 	}
-	inputController := inputcontroller.InputController{Widgets: widgets}
+	inputController := inputcontroller.InputController{
+		Widgets:    widgets,
+		MessageBus: b,
+	}
 
 	entities = append(entities, inputController)
 	return entities
 }
 
 func main() {
+	flag.StringVar(&spriteFile, "sprite", "", "pass in a filepath to open an existing sprite file")
+	flag.Parse()
+
 	game := tortuga.New()
 	entities := initEntities(game)
 

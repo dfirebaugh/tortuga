@@ -80,13 +80,11 @@ func (t *ToolBar) SelectElement(coordinate component.Coordinate) {
 
 	switch int(x) / t.Width {
 	case 0:
-		println("play")
 		t.isPlaying = true
 		t.MessageBus.Publish(message.Message{
 			Topic: topic.PLAY_ANIMATION,
 		})
 	case 1:
-		println("stop")
 		t.isPlaying = false
 		t.MessageBus.Publish(message.Message{
 			Topic: topic.STOP_ANIMATION,
