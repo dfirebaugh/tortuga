@@ -10,6 +10,9 @@ import (
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 	"github.com/dfirebaugh/tortuga/pkg/message"
 	"github.com/dfirebaugh/tortuga/pkg/sprite"
+	"github.com/dfirebaugh/tortuga/pkg/tile"
+	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
 type Frames struct {
@@ -53,6 +56,17 @@ func (f *Frames) Render() {
 		}
 	}
 
+	removeBtn := tile.Decode("2222222222222222222222222288822222222222222222222222222222222222")
+	removeBtn.PixelSize = 4
+	removeBtn.X = f.X + float64(len(f.Frames)*f.Width*int(f.PixelSize))
+	removeBtn.Y = f.Y
+	removeBtn.Draw(f.Game.GetDisplay())
+	addBtn := tile.Decode("2222222222222222222b222222bbb222222b2222222222222222222222222222")
+	addBtn.PixelSize = 4
+	addBtn.X = f.X + float64(len(f.Frames)*f.Width*int(f.PixelSize)) + float64(f.Width*int(f.PixelSize))
+	addBtn.Y = f.Y
+	addBtn.Draw(f.Game.GetDisplay())
+
 	geom.MakeRect(float64(f.currentFrame*f.Width*int(f.PixelSize))+f.X, f.Y, f.PixelSize*float64(f.Width), f.PixelSize*float64(f.Width)).Draw(f.Game.GetDisplay(), f.Game.Color(7))
 }
 
@@ -60,13 +74,26 @@ func (f Frames) Update() {}
 
 // IsWithinBounds will determine if a coordinate exists within the widget.
 func (f Frames) IsWithinBounds(coordinate component.Coordinate) bool {
-	if coordinate.X <= f.X || coordinate.X >= f.X+float64(f.Width*int(f.PixelSize))*float64(len(f.Frames)) {
+	if coordinate.X <= f.X || coordinate.X >= f.X+float64(f.Width*int(f.PixelSize))*float64(len(f.Frames)+2) {
 		return false
 	}
 	if coordinate.Y <= f.Y || coordinate.Y >= f.Y+float64(f.Width*int(f.PixelSize)) {
 		return false
 	}
 	return true
+}
+
+func (f *Frames) addFrame() {
+	if !inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
+		return
+	}
+	f.Frames = append(f.Frames, sprite.Decode("0000000000000000000000000000000000000000000000000000000000000000"))
+}
+func (f *Frames) removeFrame() {
+	if !inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
+		return
+	}
+	f.Frames = f.Frames[:len(f.Frames)-1]
 }
 
 // SelectElement will Set the element at the passed in coordinates to the active element.
@@ -81,9 +108,18 @@ func (f *Frames) SelectElement(coordinate component.Coordinate) {
 	if f.MessageBus == nil {
 		return
 	}
+
+	if int(x)/f.Width == len(f.Frames) {
+		f.removeFrame()
+		return
+	}
+	if int(x)/f.Width == len(f.Frames)+1 {
+		f.addFrame()
+		return
+	}
 	f.MessageBus.Publish(message.Message{
 		Topic:   topic.PUSH_PIXELS,
-		Payload: sprite.Encode(f.Frames[f.currentFrame]),
+		Payload: sprite.Encode(f.Frames[f.currentFrame%len(f.Frames)]),
 	})
 
 	f.currentFrame = int(x) / f.Width
