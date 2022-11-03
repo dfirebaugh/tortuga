@@ -32,7 +32,7 @@ func (f *Frames) init() {
 		f.Width = 8
 	}
 	if f.PixelSize == 0 {
-		f.PixelSize = 4
+		f.PixelSize = 2
 	}
 	if len(f.Frames) == 0 {
 		for i := 0; i < 8; i++ {
@@ -57,12 +57,12 @@ func (f *Frames) Render() {
 	}
 
 	removeBtn := tile.Decode("2222222222222222222222222288822222222222222222222222222222222222")
-	removeBtn.PixelSize = 4
+	removeBtn.PixelSize = f.PixelSize
 	removeBtn.X = f.X + float64(len(f.Frames)*f.Width*int(f.PixelSize))
 	removeBtn.Y = f.Y
 	removeBtn.Draw(f.Game.GetDisplay())
 	addBtn := tile.Decode("2222222222222222222b222222bbb222222b2222222222222222222222222222")
-	addBtn.PixelSize = 4
+	addBtn.PixelSize = f.PixelSize
 	addBtn.X = f.X + float64(len(f.Frames)*f.Width*int(f.PixelSize)) + float64(f.Width*int(f.PixelSize))
 	addBtn.Y = f.Y
 	addBtn.Draw(f.Game.GetDisplay())
