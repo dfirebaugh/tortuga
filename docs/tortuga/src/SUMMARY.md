@@ -11,6 +11,7 @@
 # Tools
 - [Sprite Editor](./tools/sprite_editor.md)
 - [Map Viewer](./tools/map_viewer.md)
+- [Tile Viewer](./tools/tile_viewer.md)
 # Examples
 - [Text](./examples/text.md)
 - [Tiles](./examples/tiles.md)
@@ -18,3 +19,4 @@
 - [Swept AABB](./examples/sweptaabb.md)
 - [Circle Collision](./examples/circleCollisions.md)
 - [paddleball](./examples/paddleball.md)
+- [sfx](./examples/sfx.md)

@@ -2,6 +2,7 @@ package emulator
 
 import (
 	"image/color"
+	"time"
 
 	"github.com/dfirebaugh/tortuga/internal/emulator/devices/display"
 )
@@ -38,6 +39,12 @@ type (
 
 	fontProcessingUnit interface {
 		PrintAt(s string, x int, y int, c uint8)
+	}
+
+	dsp interface {
+		SetVolume(v float64)
+		PlaySequence(sequence []int, interval time.Duration)
+		PlayNote(freq int, duration time.Duration)
 	}
 
 	pixelProcessingUnit interface {

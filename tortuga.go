@@ -6,6 +6,7 @@ import (
 	"github.com/dfirebaugh/tortuga/config"
 	"github.com/dfirebaugh/tortuga/internal/emulator"
 	"github.com/dfirebaugh/tortuga/internal/emulator/devices/clock"
+	"github.com/dfirebaugh/tortuga/internal/emulator/devices/dsp"
 	"github.com/dfirebaugh/tortuga/internal/emulator/devices/font"
 	"github.com/dfirebaugh/tortuga/internal/emulator/devices/ppu"
 	"github.com/dfirebaugh/tortuga/internal/emulator/devices/ppu/palette"
@@ -43,6 +44,7 @@ func New() Console {
 			ppu.New(v, tilememory.New(c)),
 			clock.New(),
 			conf,
+			&dsp.DSP{},
 		)}
 }
 

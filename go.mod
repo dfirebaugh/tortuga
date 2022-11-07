@@ -11,6 +11,8 @@ require (
 	tinygo.org/x/tinyfont v0.3.0
 )
 
+require github.com/hajimehoshi/oto/v2 v2.3.1 // indirect
+
 require (
 	github.com/ebitengine/purego v0.0.0-20220905075623-aeed57cda744 // indirect
 	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20220806181222-55e207c401ad // indirect

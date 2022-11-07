@@ -9,15 +9,17 @@ type Emulator struct {
 	clock
 	fontProcessingUnit
 	pixelProcessingUnit
+	dsp
 	config
 }
 
-func New(fp fontProcessingUnit, ppu pixelProcessingUnit, clock clock, config config) *Emulator {
+func New(fp fontProcessingUnit, ppu pixelProcessingUnit, clock clock, config config, dsp dsp) *Emulator {
 	return &Emulator{
 		fontProcessingUnit:  fp,
 		pixelProcessingUnit: ppu,
 		clock:               clock,
 		config:              config,
+		dsp:                 dsp,
 	}
 }
 

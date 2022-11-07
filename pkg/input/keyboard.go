@@ -13,6 +13,9 @@ func (Keyboard) IsUpPressed() bool {
 func (Keyboard) IsDownPressed() bool {
 	return ebiten.IsKeyPressed(ebiten.KeyS) || ebiten.IsKeyPressed(ebiten.KeyArrowDown)
 }
+func (Keyboard) IsDownJustPressed() bool {
+	return inpututil.IsKeyJustPressed(ebiten.KeyS) || inpututil.IsKeyJustPressed(ebiten.KeyArrowDown)
+}
 func (Keyboard) IsLeftPressed() bool {
 	return ebiten.IsKeyPressed(ebiten.KeyA) || ebiten.IsKeyPressed(ebiten.KeyArrowLeft)
 }
