@@ -1,8 +1,10 @@
 package dsp
 
 import (
+	"strings"
 	"time"
 
+	"github.com/dfirebaugh/tortuga/internal/emulator/devices/dsp/note"
 	"github.com/dfirebaugh/tortuga/internal/emulator/devices/dsp/stream"
 	"github.com/hajimehoshi/ebiten/v2/audio"
 )
@@ -22,7 +24,7 @@ func (d *DSP) SetVolume(v float64) {
 	d.player.SetVolume(v)
 }
 
-func (d *DSP) PlayNote(freq int, duration time.Duration) {
+func (d *DSP) PlayNote(freq float32, duration time.Duration) {
 	if d.audioContext == nil {
 		d.setAudioContext()
 	}
@@ -38,7 +40,26 @@ func (d *DSP) PlayNote(freq int, duration time.Duration) {
 	p.Close()
 }
 
-func (d *DSP) PlaySequence(sequence []int, interval time.Duration) {
+func (d *DSP) Notes() map[string]float32 {
+	return note.Notes
+}
+
+func (d *DSP) Frequency(letter string) float32 {
+	return note.Notes[strings.ToUpper(letter)]
+}
+
+func (d *DSP) PlayNotes(notes []string, interval time.Duration) {
+	frequencies := []float32{}
+	for _, n := range notes {
+		if freq, ok := note.Notes[strings.ToUpper(n)]; ok {
+			frequencies = append(frequencies, freq)
+		}
+	}
+
+	d.PlaySequence(frequencies, interval)
+}
+
+func (d *DSP) PlaySequence(sequence []float32, interval time.Duration) {
 	for _, f := range sequence {
 		d.PlayNote(f, interval)
 	}

@@ -7,11 +7,11 @@ import (
 type stream struct {
 	position   int64
 	remaining  []byte
-	frequency  int
+	frequency  float32
 	sampleRate int
 }
 
-func New(sampleRate int, frequency int) *stream {
+func New(sampleRate int, frequency float32) *stream {
 	return &stream{
 		sampleRate: sampleRate,
 		frequency:  frequency,
@@ -34,7 +34,7 @@ func (s *stream) Read(buf []byte) (int, error) {
 		buf = make([]byte, len(origBuf)+4-len(origBuf)%4)
 	}
 
-	var length = int64(s.sampleRate / s.frequency)
+	var length = int64(s.sampleRate / int(s.frequency))
 	p := s.position / 4
 	for i := 0; i < len(buf)/4; i++ {
 		const max = 32767

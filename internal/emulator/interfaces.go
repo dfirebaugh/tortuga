@@ -43,8 +43,15 @@ type (
 
 	dsp interface {
 		SetVolume(v float64)
-		PlaySequence(sequence []int, interval time.Duration)
-		PlayNote(freq int, duration time.Duration)
+		// PlaySequence plays a sequence of tones
+		PlaySequence(sequence []float32, interval time.Duration)
+		PlayNote(freq float32, duration time.Duration)
+		PlayNotes(notes []string, interval time.Duration)
+		// Frequency returns a frequency to match the note passed in
+		//  e.g. Frequency("c3") returns 130.81
+		Frequency(letter string) float32
+		// Notes returns a map of note symbols and their matching frequencies
+		Notes() map[string]float32
 	}
 
 	pixelProcessingUnit interface {

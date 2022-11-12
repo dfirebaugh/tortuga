@@ -20,3 +20,5 @@
 - [Circle Collision](./examples/circleCollisions.md)
 - [paddleball](./examples/paddleball.md)
 - [sfx](./examples/sfx.md)
+- [tone](./examples/tone.md)
+- [sequence](./examples/sequence.md)

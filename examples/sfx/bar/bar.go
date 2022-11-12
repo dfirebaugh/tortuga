@@ -33,7 +33,7 @@ func (b *Bar) Render() {
 		geom.MakeRect(x, y, w, 5).Filled(b.Game.GetDisplay(), b.Game.Color(4))
 	}
 
-	geom.MakeLine(geom.MakePoint(0, float64(b.Game.GetScreenHeight())/2), geom.MakePoint(float64(b.Game.GetScreenWidth()), float64(b.Game.GetScreenHeight())/2)).Draw(b.Game.GetDisplay(), b.Game.Color(5))
+	geom.MakeRect(0, float64(b.Game.GetScreenHeight()/2)-2, float64(b.Game.GetScreenWidth()), 2).Filled(b.Game.GetDisplay(), b.Game.Color(5))
 }
 
 func (b *Bar) IsWithinBounds(coordinate component.Coordinate) bool {

@@ -39,9 +39,9 @@ func (s *Steps) Update() {
 	keyboard := input.Keyboard{}
 	if keyboard.IsDownJustPressed() {
 		go func(samples []*bar.Bar) {
-			sequence := []int{}
+			sequence := []float32{}
 			for _, f := range samples {
-				sequence = append(sequence, int(f.GetValue()*1000))
+				sequence = append(sequence, float32(f.GetValue()*1000))
 			}
 
 			s.game.PlaySequence(sequence, time.Microsecond*50000)

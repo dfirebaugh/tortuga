@@ -2,6 +2,7 @@ package input
 
 type PlayerInput interface {
 	IsUpPressed() bool
+	IsUpJustPressed() bool
 	IsDownPressed() bool
 	IsDownJustPressed() bool
 	IsLeftPressed() bool

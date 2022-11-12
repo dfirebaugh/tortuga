@@ -10,6 +10,9 @@ type Keyboard struct{}
 func (Keyboard) IsUpPressed() bool {
 	return ebiten.IsKeyPressed(ebiten.KeyW) || ebiten.IsKeyPressed(ebiten.KeyArrowUp)
 }
+func (Keyboard) IsUpJustPressed() bool {
+	return inpututil.IsKeyJustPressed(ebiten.KeyW) || inpututil.IsKeyJustPressed(ebiten.KeyArrowUp)
+}
 func (Keyboard) IsDownPressed() bool {
 	return ebiten.IsKeyPressed(ebiten.KeyS) || ebiten.IsKeyPressed(ebiten.KeyArrowDown)
 }
