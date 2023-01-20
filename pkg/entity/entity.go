@@ -6,4 +6,5 @@ type Entity interface {
 	Update()
 	Render()
 	SetID(id uuid.UUID)
+	GetID() uuid.UUID
 }
