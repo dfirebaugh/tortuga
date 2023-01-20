@@ -28,6 +28,10 @@ func (v Vector) GetDistance(b Vector) float64 {
 	return math.Sqrt(math.Pow(v[0]-b[0], 2) + math.Pow(v[1]-b[1], 2))
 }
 
+func (v Vector) GetDirection(b Vector) float64 {
+	return math.Atan2(b[1]-v[1], b[0]-v[0])
+}
+
 func (v Vector) Subtract(other Vector) Vector {
 	return MakeVector(v[0]-other[0], v[1]-other[1])
 }

@@ -1,5 +1,7 @@
 package geom
 
+import "image/color"
+
 type Point struct {
 	X float64
 	Y float64
@@ -13,6 +15,6 @@ func (p Point) ToVector() Vector {
 	return MakeVector(p.X, p.Y)
 }
 
-func (p Point) Draw(d displayer, clr uint8) {
-	d.Put(int16(p.X), int16(p.Y), clr)
+func (p Point) Draw(d displayer, c color.RGBA) {
+	d.SetPixel(int16(p.X), int16(p.Y), c)
 }
