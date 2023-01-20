@@ -62,3 +62,11 @@ func (c Console) RenderPalette() {
 func (c Console) Color(clr uint8) color.Color {
 	return c.GetPalette()[clr]
 }
+func (c Console) RGBA(clr uint8) color.RGBA {
+	r, g, b, _ := c.GetPalette()[clr].RGBA()
+	return color.RGBA{
+		R: uint8(r),
+		G: uint8(g),
+		B: uint8(b),
+	}
+}
