@@ -140,7 +140,7 @@ static const char sprite_pix[128] =
 	result += `
 };
 
-static const char palette[16][3] = 
+static const char shared_palette[16][3] = 
 {
 	{127, 36, 84},
 	{28, 43, 83},
