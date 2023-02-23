@@ -40,7 +40,7 @@ func (c cart) Render() {
 	game.Clear()
 	rect.Draw(d, game.Color(3))
 
-	geom.MakePoint(rect1.GetCenter()).Draw(d, uint8(12))
+	geom.MakePoint(rect1.GetCenter()).Draw(d, game.RGBA(uint8(12)))
 	if rect.IsAxisAlignedCollision(rect1) {
 		rect1.Draw(d, game.Color(4))
 		return

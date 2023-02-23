@@ -81,6 +81,88 @@ func Encode(spriteNums []uint8) string {
 	return result
 }
 
+func EncodeCStruct(spriteNums []uint8) string {
+	result := `
+static const char sprite_pix[128] = 
+{`
+	for i, c := range spriteNums {
+		n := ""
+
+		if i%16 == 0 || i == 0 {
+			n += "\n\t"
+		}
+
+		if i%2 == 0 {
+			n += "0x"
+		}
+		switch c {
+		case 0:
+			n += "f"
+		case 1:
+			n += "0"
+		case 2:
+			n += "1"
+		case 3:
+			n += "2"
+		case 4:
+			n += "3"
+		case 5:
+			n += "4"
+		case 6:
+			n += "5"
+		case 7:
+			n += "6"
+		case 8:
+			n += "7"
+		case 9:
+			n += "8"
+		case 10:
+			n += "9"
+		case 11:
+			n += "a"
+		case 12:
+			n += "b"
+		case 13:
+			n += "c"
+		case 14:
+			n += "d"
+		case 15:
+			n += "e"
+		}
+
+		if i%2 == 1 && i != len(spriteNums)-1 {
+			n += ", "
+		}
+
+		result += n
+	}
+
+	result += `
+};
+
+static const char palette[16][3] = 
+{
+	{127, 36, 84},
+	{28, 43, 83},
+	{0, 135, 81},
+	{171, 82, 54},
+	{96, 88, 79},
+	{195, 195, 198},
+	{255, 241, 233},
+	{237, 27, 81},
+	{250, 162, 27},
+	{247, 236, 47},
+	{93, 187, 77},
+	{81, 166, 220},
+	{131, 118, 156},
+	{241, 118, 166},
+	{252, 204, 171},
+};
+`
+
+	return result
+}
+
 func Decode(spriteString string) (pixels []uint8) {
 	return Parse(spriteString)
 }
