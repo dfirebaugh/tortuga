@@ -30,8 +30,8 @@ func (c *Coordinate) GetDirection(other Coordinate) float64 {
 	return a.GetDirection(b)
 }
 
-func (c *Coordinate) TranslateXY(pixelSize float64) (float64, float64) {
-	x := (c.X - c.X) / pixelSize
-	y := (c.Y - c.Y) / pixelSize
+func (c *Coordinate) TranslateXY(offset Coordinate, pixelSize float64) (float64, float64) {
+	x := (c.X - offset.X) / pixelSize
+	y := (c.Y - offset.Y) / pixelSize
 	return x, y
 }
