@@ -1,6 +1,8 @@
 package component
 
 import (
+	"fmt"
+
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 )
 
@@ -8,6 +10,10 @@ type Coordinate struct {
 	// x and y represents coordinates on the screen
 	X float64
 	Y float64
+}
+
+func (c *Coordinate) String() string {
+	return fmt.Sprintf("%d, %d", int(c.X), int(c.Y))
 }
 
 func (c *Coordinate) SetCoordinate(newCoord Coordinate) {
