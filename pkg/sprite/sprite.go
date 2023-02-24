@@ -82,9 +82,10 @@ func Encode(spriteNums []uint8) string {
 }
 
 func EncodeCStruct(spriteNums []uint8) string {
-	result := `
-static const char sprite_pix[128] = 
-{`
+	result := fmt.Sprintf(`
+static const char sprite_pix[%d] = 
+{`, len(spriteNums)/2)
+
 	for i, c := range spriteNums {
 		n := ""
 
