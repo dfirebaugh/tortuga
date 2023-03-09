@@ -1,21 +1,20 @@
 package tortuga
 
 import (
-	"image/color"
-
 	"github.com/dfirebaugh/tortuga/config"
 	"github.com/dfirebaugh/tortuga/internal/emulator"
 	"github.com/dfirebaugh/tortuga/internal/emulator/devices/clock"
 	"github.com/dfirebaugh/tortuga/internal/emulator/devices/dsp"
 	"github.com/dfirebaugh/tortuga/internal/emulator/devices/font"
-	"github.com/dfirebaugh/tortuga/internal/emulator/devices/ppu"
-	"github.com/dfirebaugh/tortuga/internal/emulator/devices/ppu/palette"
-	"github.com/dfirebaugh/tortuga/internal/emulator/devices/tilememory"
-	"github.com/dfirebaugh/tortuga/internal/emulator/devices/vram"
 	"github.com/dfirebaugh/tortuga/internal/engine"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
+	"github.com/dfirebaugh/tortuga/pkg/texture"
 	"tinygo.org/x/tinyfont/proggy"
 )
+
+type Texture struct {
+	texture.Texture
+}
 
 type Cart interface {
 	Update()
@@ -27,46 +26,31 @@ type Console struct {
 	*emulator.Emulator
 }
 
-var conf = config.Default()
-
 func (c Console) Run(cart Cart) {
 	c.LoadCart(cart)
-	engine.New(c, conf).Run()
+	engine.New(c).Run()
 }
 
 func New() Console {
-	c := config.Default()
-	p := palette.New(c)
-	v := vram.New(c, p)
-	return Console{
+	p := config.NewPalette()
+	display := texture.New(texture.Rect(0, 0, config.Config.GetScreenWidth(), config.Config.GetScreenHeight()))
+	console := Console{
 		emulator.New(
-			font.New(v, p, &proggy.TinySZ8pt7b),
-			ppu.New(v, tilememory.New(c)),
+			font.New(display, p, &proggy.TinySZ8pt7b),
 			clock.New(),
-			conf,
 			&dsp.DSP{},
+			display,
 		)}
+	return console
 }
 
 func (c Console) RenderPalette() {
-	p := c.GetPalette()
-	size := float64(c.GetScreenWidth() / len(p))
-	for i, _ := range p {
+	p := config.Config.GetPalette()
+	size := float64(config.Config.GetScreenWidth() / len(p))
+	for i := range p {
 		geom.MakeRect(
 			float64(i)*size,
-			float64(c.GetScreenHeight())-size, size, size).
-			Filled(c.GetDisplay(), c.Color(uint8(i)))
-	}
-}
-
-func (c Console) Color(clr uint8) color.Color {
-	return c.GetPalette()[clr]
-}
-func (c Console) RGBA(clr uint8) color.RGBA {
-	r, g, b, _ := c.GetPalette()[clr].RGBA()
-	return color.RGBA{
-		R: uint8(r),
-		G: uint8(g),
-		B: uint8(b),
+			float64(config.Config.GetScreenHeight())-size, size, size).
+			Filled(c.GetDisplay(), config.NewPalette().GetColor(uint8(i)))
 	}
 }

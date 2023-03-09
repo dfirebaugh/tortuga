@@ -2,14 +2,16 @@ package sprite
 
 import (
 	"fmt"
+	"image/color"
 	"strings"
 	"time"
 
+	"github.com/dfirebaugh/tortuga/config"
 	"gopkg.in/yaml.v3"
 )
 
 type displayer interface {
-	Put(x int16, y int16, c uint8)
+	SetPixel(x, y int16, c color.RGBA)
 }
 
 type Sprite struct {
@@ -250,16 +252,22 @@ func (s Sprite) VerticalMirror(animationIndex int, frameIndex int) []uint8 {
 	return pixels
 }
 
+func DrawPixels(d displayer, pixels []uint8, x float64, y float64) {
+	s := New()
+
+	s.DrawPixels(d, pixels, x+2, y+2)
+}
+
 func (s Sprite) DrawPixels(d displayer, pixels []uint8, x float64, y float64) {
 	if s.Width == 0 {
 		s.Width = 8
 	}
 
 	for i, pixel := range pixels {
-		d.Put(
+		d.SetPixel(
 			int16(x+float64(i%s.Width)),
 			int16(y+float64(i/s.Width)),
-			pixel)
+			config.NewPalette().RGBA(pixel))
 	}
 }
 
@@ -273,9 +281,9 @@ func (s Sprite) Draw(d displayer, animationIndex int, x float64, y float64) {
 	}
 	frameIndex := int(time.Now().Unix()) % len(s.Animations[animationIndex])
 	for i, pixel := range s.Animations[animationIndex][frameIndex] {
-		d.Put(
+		d.SetPixel(
 			int16(x+float64(i%s.Width)),
 			int16(y+float64(i/s.Width)),
-			pixel)
+			config.NewPalette().RGBA(pixel))
 	}
 }

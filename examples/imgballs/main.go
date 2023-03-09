@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/dfirebaugh/tortuga"
-	"github.com/dfirebaugh/tortuga/examples/dynamicball/ball"
+	"github.com/dfirebaugh/tortuga/examples/imgballs/ball"
 	"github.com/dfirebaugh/tortuga/pkg/input"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 )
@@ -20,11 +20,15 @@ var (
 func (c cart) Update() {
 	if input.IsLeftClickPressed() {
 		x, y := input.CursorPositionFloat()
+		if x == 0 && y == 0 {
+			return
+		}
 		generateBallsAt(1, x, y)
 	}
 
 	if input.IsRightClickPressed() {
 		balls = []*ball.Ball{}
+		game.ClearRenderPipeline()
 	}
 	for _, ball := range balls {
 		ball.Update()
@@ -36,7 +40,8 @@ func (c cart) Render() {
 	for _, ball := range balls {
 		ball.Render()
 	}
-	game.PrintAt(fmt.Sprintf("balls: %d", len(balls)), 10, 25, 7)
+	x, y := input.CursorPositionFloat()
+	game.PrintAt(fmt.Sprintf("%d, %d", int(x), int(y)), 20, 30, 12)
 }
 
 func generateBallsAt(n int, x float64, y float64) {
@@ -58,6 +63,9 @@ func main() {
 	game = tortuga.New()
 	generateBallsAt(2, float64(game.GetScreenWidth()/2), float64(game.GetScreenHeight()/2))
 	game.SetFPSEnabled(true)
+	game.SetRenderPipelineDebug(true)
+	game.SetScreenWidth(1024)
+	game.SetScreenHeight(1024)
 
 	game.Run(cart{})
 }
