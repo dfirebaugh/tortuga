@@ -5,8 +5,19 @@ import (
 	"image/color"
 )
 
+var Config *config
+var OnChangeCallback func()
+
+func init() {
+	Config = Default()
+}
+
+func SetOnChangeCallback(fn func()) {
+	OnChangeCallback = fn
+}
+
 var (
-	defaultPalette = []color.Color{
+	defaultPalette = Palette{
 		color.Black,
 		color.RGBA{127, 36, 84, 255},
 		color.RGBA{28, 43, 83, 255},
@@ -35,11 +46,12 @@ type config struct {
 		Height int `yaml:"height"`
 		Width  int `yaml:"width"`
 	} `yaml:"window"`
-	ScaleFactor  int  `yaml:"scale-factor"`
-	DebugEnabled bool `yaml:"debug"`
-	FPSEnabled   bool `yaml:"fps-enabled"`
-	Volume       int  `yaml:"volume"`
-	Palette      []color.Color
+	ScaleFactor         int  `yaml:"scale-factor"`
+	DebugEnabled        bool `yaml:"debug"`
+	FPSEnabled          bool `yaml:"fps-enabled"`
+	Volume              int  `yaml:"volume"`
+	RenderPipelineDebug bool `yaml:"render-pipeline-debug"`
+	Palette             []color.Color
 }
 
 func Default() *config {
@@ -56,6 +68,14 @@ func Default() *config {
 		Volume:       25,
 		Palette:      defaultPalette,
 	}
+}
+
+func SetConfig(c *config) {
+	Config = c
+	if OnChangeCallback == nil {
+		return
+	}
+	OnChangeCallback()
 }
 
 func (c config) GetTitle() string {
@@ -88,30 +108,59 @@ func (c config) GetFPSEnabled() bool {
 	return c.FPSEnabled
 }
 
+func (c config) GetRenderPipelineDebug() bool {
+	return c.RenderPipelineDebug
+}
+
+func (c config) GetColor(i uint8) color.Color {
+	return c.Palette[i]
+}
+
+func (c config) Color(i uint8) color.Color {
+	return c.GetColor(i)
+}
+
+func (c config) RGBA(i uint8) color.RGBA {
+	return Palette(c.GetPalette()).RGBA(i)
+}
+
 func (c *config) SetTitle(v string) {
 	c.Title = v
+	SetConfig(c)
 }
 func (c *config) SetTileSize(v int) {
 	c.TileSize = v
+	SetConfig(c)
 }
 func (c *config) SetScaleFactor(v int) {
 	c.ScaleFactor = v
+	SetConfig(c)
 }
 func (c *config) SetScreenHeight(v int) {
 	c.Window.Height = v
+	SetConfig(c)
 }
 func (c *config) SetScreenWidth(v int) {
 	c.Window.Width = v
+	SetConfig(c)
 }
 func (c *config) SetPalette(v []color.Color) {
 	c.Palette = v
+	SetConfig(c)
 }
 func (c *config) SetDebugEnabled(v bool) {
 	c.DebugEnabled = v
+	SetConfig(c)
 }
 func (c *config) SetFPSEnabled(v bool) {
 	c.FPSEnabled = v
+	SetConfig(c)
 }
 func (c *config) SetVolume(v int) {
 	c.Volume = v
+	SetConfig(c)
+}
+
+func (c *config) SetRenderPipelineDebug(v bool) {
+	c.RenderPipelineDebug = v
 }

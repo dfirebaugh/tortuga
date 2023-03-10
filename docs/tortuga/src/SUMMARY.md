@@ -8,6 +8,7 @@
 - [Tile](./assets/tile.md)
 - [Map](./assets/map.md)
 - [Sprite](./assets/sprite.md)
+- [Textures](./assets/textures.md)
 # Tools
 - [Sprite Editor](./tools/sprite_editor.md)
 - [Map Viewer](./tools/map_viewer.md)
@@ -15,10 +16,12 @@
 # Examples
 - [Text](./examples/text.md)
 - [Tiles](./examples/tiles.md)
+- [Textures](./examples/textures.md)
 - [Axis Aligned Collisions](./examples/aabb.md)
 - [Swept AABB](./examples/sweptaabb.md)
 - [Circle Collision](./examples/circleCollisions.md)
 - [paddleball](./examples/paddleball.md)
+- [gameoflife](./examples/gameoflife.md)
 - [sfx](./examples/sfx.md)
 - [tone](./examples/tone.md)
 - [sequence](./examples/sequence.md)

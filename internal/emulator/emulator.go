@@ -1,25 +1,30 @@
 package emulator
 
 import (
-	"image"
+	"github.com/dfirebaugh/tortuga/config"
+	"github.com/dfirebaugh/tortuga/pkg/texture"
 )
 
 type Emulator struct {
 	cart cart
 	clock
 	fontProcessingUnit
-	pixelProcessingUnit
 	dsp
-	config
+	frameBuffer
+	configuration
+	renderPipeline renderPipeline
+	tileMemory
 }
 
-func New(fp fontProcessingUnit, ppu pixelProcessingUnit, clock clock, config config, dsp dsp) *Emulator {
+func New(fp fontProcessingUnit, clock clock, dsp dsp, frameBuffer frameBuffer, tileMemory tileMemory, rp renderPipeline) *Emulator {
 	return &Emulator{
-		fontProcessingUnit:  fp,
-		pixelProcessingUnit: ppu,
-		clock:               clock,
-		config:              config,
-		dsp:                 dsp,
+		fontProcessingUnit: fp,
+		clock:              clock,
+		dsp:                dsp,
+		frameBuffer:        frameBuffer,
+		configuration:      config.Config,
+		tileMemory:         tileMemory,
+		renderPipeline:     rp,
 	}
 }
 
@@ -31,9 +36,31 @@ func (e Emulator) Update() {
 	e.cart.Update()
 }
 
-func (e Emulator) Render(screen *image.RGBA) {
-	screen.Pix = []uint8{}
-	screen.Pix = e.pixelProcessingUnit.GetFrame()
+func (e Emulator) Render() {
 	e.cart.Render()
-	e.pixelProcessingUnit.Swap()
+	e.frameBuffer.Render()
+}
+
+func (e Emulator) GetRenderPipeline() []*texture.Texture {
+	return e.renderPipeline.Get()
+}
+
+func (e Emulator) AddToRenderPipeline(t *texture.Texture) {
+	e.renderPipeline.Append(t)
+}
+func (e Emulator) ClearRenderPipeline() {
+	e.renderPipeline.Clear()
+}
+
+func (e *Emulator) SetScreenHeight(v int) {
+	config.Config.SetScreenHeight(v)
+	e.ResetFB()
+}
+func (e *Emulator) SetScreenWidth(v int) {
+	config.Config.SetScreenWidth(v)
+	e.ResetFB()
+}
+func (e *Emulator) ResetFB() {
+	e.frameBuffer = texture.New(texture.Rect(0, 0, config.Config.GetScreenWidth(), config.Config.GetScreenHeight()))
+	e.fontProcessingUnit.ResetDisplay(e.frameBuffer)
 }

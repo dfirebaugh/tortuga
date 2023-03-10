@@ -13,6 +13,8 @@ env GOOS=js GOARCH=wasm go build -o ./.dist/examples/paddleball.wasm ./examples/
 env GOOS=js GOARCH=wasm go build -o ./.dist/examples/sfx.wasm ./examples/sfx/
 env GOOS=js GOARCH=wasm go build -o ./.dist/examples/sequence.wasm ./examples/sequence/
 env GOOS=js GOARCH=wasm go build -o ./.dist/examples/tone.wasm ./examples/tone/
+env GOOS=js GOARCH=wasm go build -o ./.dist/examples/gameoflife.wasm ./examples/gameoflife/
+env GOOS=js GOARCH=wasm go build -o ./.dist/examples/texture.wasm ./examples/texture/
 cp .dist/examples/* .dist/web/
 cp .dist/examples/* .dist/web/examples/
 
