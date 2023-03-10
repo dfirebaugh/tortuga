@@ -13,6 +13,7 @@ type Emulator struct {
 	frameBuffer
 	configuration
 	renderPipeline []*texture.Texture
+	deprecated
 }
 
 func New(fp fontProcessingUnit, clock clock, dsp dsp, frameBuffer frameBuffer) *Emulator {

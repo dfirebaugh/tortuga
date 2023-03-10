@@ -68,10 +68,4 @@ type (
 		GetFrame() []byte
 		Render()
 	}
-
-	tileMemory interface {
-		SetTile(tileX, tileY int, pixels []uint8)
-		SetTiles(tileMap map[rune][]uint8, background string)
-		GetTileFrame(x int, y int) []byte
-	}
 )

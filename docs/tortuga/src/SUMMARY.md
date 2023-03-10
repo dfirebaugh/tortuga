@@ -8,6 +8,7 @@
 - [Tile](./assets/tile.md)
 - [Map](./assets/map.md)
 - [Sprite](./assets/sprite.md)
+- [Textures](./assets/textures.md)
 # Tools
 - [Sprite Editor](./tools/sprite_editor.md)
 - [Map Viewer](./tools/map_viewer.md)
