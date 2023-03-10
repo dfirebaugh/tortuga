@@ -21,6 +21,7 @@ func New(width int, height int) *ImageFB {
 		buffer: make(graphicsBuffer, height*width),
 		Width:  width,
 		Height: height,
+		Alpha:  0xFF,
 	}
 }
 
