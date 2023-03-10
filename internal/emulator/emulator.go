@@ -2,6 +2,7 @@ package emulator
 
 import (
 	"github.com/dfirebaugh/tortuga/config"
+	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 	"github.com/dfirebaugh/tortuga/pkg/texture"
 )
 
@@ -63,4 +64,8 @@ func (e *Emulator) SetScreenWidth(v int) {
 func (e *Emulator) ResetFB() {
 	e.frameBuffer = texture.New(texture.Rect(0, 0, config.Config.GetScreenWidth(), config.Config.GetScreenHeight()))
 	e.fontProcessingUnit.ResetDisplay(e.frameBuffer)
+}
+
+func (e *Emulator) FillDisplay(c uint8) {
+	geom.MakeRect(0, 0, float64(e.GetScreenWidth()), float64(e.GetScreenHeight())).Filled(e.GetDisplay(), e.Color(c))
 }

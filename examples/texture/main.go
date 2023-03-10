@@ -1,8 +1,9 @@
 package main
 
 import (
+	"image/color"
+
 	"github.com/dfirebaugh/tortuga"
-	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 	"github.com/dfirebaugh/tortuga/pkg/sprite"
 	"github.com/dfirebaugh/tortuga/pkg/texture"
 )
@@ -22,13 +23,15 @@ var heartTexture = texture.New(texture.Rect(0, 0, 8, 8))
 
 func (c cart) Render() {
 	// setting the background to a different color
-	geom.MakeRect(0, 0, float64(game.GetScreenWidth()), float64(game.GetScreenHeight())).Filled(game.GetDisplay(), game.Color(2))
+	game.FillDisplay(2)
 }
 
 func main() {
 	game = tortuga.New()
 	game.SetFPSEnabled(true)
 	game.SetRenderPipelineDebug(true)
+	game.SetTransparentColor(color.Black)
+
 	game.SetScaleFactor(3)
 	heartTexture.X = float64(game.GetScreenWidth() / 2)
 	heartTexture.Y = float64(game.GetScreenHeight() / 2)

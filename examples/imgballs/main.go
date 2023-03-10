@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"image/color"
 
 	"github.com/dfirebaugh/tortuga"
 	"github.com/dfirebaugh/tortuga/examples/imgballs/ball"
@@ -69,11 +70,14 @@ func blockFactory(v uint8) []uint8 {
 
 func main() {
 	game = tortuga.New()
-	generateBallsAt(2, float64(game.GetScreenWidth()/2), float64(game.GetScreenHeight()/2))
 	game.SetFPSEnabled(true)
 	game.SetRenderPipelineDebug(true)
 	game.SetScreenWidth(1024)
 	game.SetScreenHeight(1024)
+	game.SetTransparentColor(color.Black)
+
+	generateBallsAt(2, float64(game.GetScreenWidth()/2), float64(game.GetScreenHeight()/2))
+
 	for i := 0; i < game.GetScreenWidth()/game.GetTileSize(); i++ {
 		game.SetTile(i, 0, blockFactory(uint8(i+1)))
 		game.SetTile(0, i, blockFactory(uint8(i+1)))

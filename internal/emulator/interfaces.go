@@ -22,6 +22,7 @@ type (
 		GetDebugEnabled() bool
 		GetFPSEnabled() bool
 		GetRenderPipelineDebug() bool
+		GetTransparentColor() color.Color
 		GetColor(i uint8) color.Color
 		SetRenderPipelineDebug(v bool)
 		SetTitle(v string)
@@ -29,6 +30,7 @@ type (
 		SetPalette(v []color.Color)
 		SetDebugEnabled(v bool)
 		SetFPSEnabled(v bool)
+		SetTransparentColor(v color.Color)
 		SetVolume(v int)
 	}
 

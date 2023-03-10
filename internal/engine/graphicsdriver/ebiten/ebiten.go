@@ -69,8 +69,7 @@ func (g *Game) renderRenderPipeline(screen *ebiten.Image) {
 }
 
 func (g *Game) renderDefaultFrameBuffer(screen *ebiten.Image) {
-	pixels := make([]byte, config.Config.GetScreenWidth()*config.Config.GetScreenHeight()*4)
-	screen.WritePixels(mergeLayers(pixels, g.Console.GetFrame()))
+	screen.WritePixels(g.Console.GetFrame())
 	g.Console.Render()
 }
 

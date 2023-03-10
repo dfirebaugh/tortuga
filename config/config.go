@@ -51,6 +51,7 @@ type config struct {
 	FPSEnabled          bool `yaml:"fps-enabled"`
 	Volume              int  `yaml:"volume"`
 	RenderPipelineDebug bool `yaml:"render-pipeline-debug"`
+	TransparentColor    color.Color
 	Palette             []color.Color
 }
 
@@ -61,12 +62,13 @@ func Default() *config {
 			Height int `yaml:"height"`
 			Width  int `yaml:"width"`
 		}{Height: 240, Width: 320},
-		ScaleFactor:  1,
-		TileSize:     8,
-		DebugEnabled: false,
-		FPSEnabled:   false,
-		Volume:       25,
-		Palette:      defaultPalette,
+		ScaleFactor:      1,
+		TileSize:         8,
+		DebugEnabled:     false,
+		FPSEnabled:       false,
+		Volume:           25,
+		Palette:          defaultPalette,
+		TransparentColor: color.RGBA{1, 1, 1, 255},
 	}
 }
 
@@ -110,6 +112,10 @@ func (c config) GetFPSEnabled() bool {
 
 func (c config) GetRenderPipelineDebug() bool {
 	return c.RenderPipelineDebug
+}
+
+func (c config) GetTransparentColor() color.Color {
+	return c.TransparentColor
 }
 
 func (c config) GetColor(i uint8) color.Color {
@@ -163,4 +169,8 @@ func (c *config) SetVolume(v int) {
 
 func (c *config) SetRenderPipelineDebug(v bool) {
 	c.RenderPipelineDebug = v
+}
+
+func (c *config) SetTransparentColor(v color.Color) {
+	c.TransparentColor = v
 }

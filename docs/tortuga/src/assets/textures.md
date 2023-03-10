@@ -15,6 +15,8 @@ e.g.
 package main
 
 import (
+	"image/color"
+
 	"github.com/dfirebaugh/tortuga"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 	"github.com/dfirebaugh/tortuga/pkg/texture"
@@ -30,7 +32,7 @@ var (
 func (c cart) Update() {}
 
 func (c cart) Render() {
-	geom.MakeRect(0, 0, float64(game.GetScreenWidth()), float64(game.GetScreenHeight())).Filled(game.GetDisplay(), game.Color(4))
+	game.FillDisplay(2)
 }
 
 var (
@@ -40,6 +42,7 @@ var (
 
 func main() {
 	game = tortuga.New()
+	game.SetTransparentColor(color.Black)
 
 	t.X = float64(game.GetScreenWidth() / 2)
 	t.Y = float64(game.GetScreenHeight() / 2)
@@ -51,6 +54,7 @@ func main() {
 
 	game.Run(cart{})
 }
+
 ```
 
 ### Simple Example

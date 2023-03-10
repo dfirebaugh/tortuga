@@ -25,6 +25,15 @@ func New(width int, height int) *ImageFB {
 	}
 }
 
+func (i *ImageFB) fillTransparent(frame []byte) []byte {
+	r, g, b, a := color.Transparent.RGBA()
+	frame = append(frame, uint8(r))
+	frame = append(frame, uint8(g))
+	frame = append(frame, uint8(b))
+	frame = append(frame, uint8(a))
+	return frame
+}
+
 func (i *ImageFB) Put(x, y int16, c uint8) {
 	i.SetPixel(x, y, config.NewPalette().RGBA(c))
 }
@@ -62,6 +71,12 @@ func (i *ImageFB) GetFrame() []byte {
 				continue
 			}
 			el := i.buffer[i.Width*y+x]
+
+			r, g, b, _ := config.Config.GetTransparentColor().RGBA()
+			if el[0] == uint8(r) && el[1] == uint8(g) && el[2] == uint8(b) {
+				frame = i.fillTransparent(frame)
+				continue
+			}
 			frame = append(frame, el[0])
 			frame = append(frame, el[1])
 			frame = append(frame, el[2])
