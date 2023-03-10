@@ -37,7 +37,7 @@ func (c cart) Render() {
 
 var (
 	circle = geom.MakeCircle(8, 8, 4)
-	t      = texture.New(texture.Rect(0, 0, int(circle.Diameter()*2)+1, int(circle.Diameter()*2)+1))
+	t      = texture.New(int(circle.Diameter()*2)+1, int(circle.Diameter()*2)+1)
 )
 
 func main() {
@@ -74,7 +74,7 @@ func (c cart) Render() {}
 
 var (
 	heartPixels = sprite.Parse("0880088088888888888887888888888888888888088888800088880000088000")
-	heartTexture = texture.New(texture.Rect(0, 0, 8, 8))
+	heartTexture = texture.New(8, 8)
 )
 
 func main() {

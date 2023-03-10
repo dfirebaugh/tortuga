@@ -35,7 +35,7 @@ func (c Console) Run(cart Cart) {
 
 func New() Console {
 	p := config.NewPalette()
-	display := texture.New(texture.Rect(0, 0, config.Config.GetScreenWidth(), config.Config.GetScreenHeight()))
+	display := texture.New(config.Config.GetScreenWidth(), config.Config.GetScreenHeight())
 	rp := &renderpipeline.RenderPipeline{}
 	console := Console{
 		emulator.New(

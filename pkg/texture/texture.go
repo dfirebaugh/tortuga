@@ -14,11 +14,8 @@ type Texture struct {
 	imagefb.ImageFB
 }
 
-func Rect(minX, minY, maxX, maxY int) image.Rectangle {
-	return image.Rect(minX, minY, maxX, maxY)
-}
-
-func New(rect image.Rectangle) *Texture {
+func New(width int, height int) *Texture {
+	rect := image.Rect(0, 0, width, height)
 	return &Texture{
 		RGBA:    *image.NewRGBA(rect),
 		ImageFB: *imagefb.New(rect.Dx(), rect.Dy()),

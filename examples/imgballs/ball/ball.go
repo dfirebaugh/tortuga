@@ -41,7 +41,7 @@ func New(game tortuga.Console, collidables []*Ball) *Ball {
 	b.R = float64(rand.Intn(4)) + 2
 	b.mass = b.R
 
-	b.img = texture.New(texture.Rect(0, 0, int(b.Diameter()*2), int(b.Diameter()*2)))
+	b.img = texture.New(int(b.Diameter()*2), int(b.Diameter()*2))
 	b.game.AddToRenderPipeline(b.img)
 
 	b.render()

@@ -16,7 +16,7 @@ type TileMemory struct {
 }
 
 func (tm TileMemory) SetTile(tileX, tileY int, pixels []uint8) {
-	t := texture.New(texture.Rect(0, 0, config.Config.GetTileSize(), config.Config.GetTileSize()))
+	t := texture.New(config.Config.GetTileSize(), config.Config.GetTileSize())
 
 	t.X = float64(tileX * config.Config.GetTileSize())
 	t.Y = float64(tileY * config.Config.GetTileSize())

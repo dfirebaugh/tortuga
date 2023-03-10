@@ -62,7 +62,7 @@ func (e *Emulator) SetScreenWidth(v int) {
 	e.ResetFB()
 }
 func (e *Emulator) ResetFB() {
-	e.frameBuffer = texture.New(texture.Rect(0, 0, config.Config.GetScreenWidth(), config.Config.GetScreenHeight()))
+	e.frameBuffer = texture.New(config.Config.GetScreenWidth(), config.Config.GetScreenHeight())
 	e.fontProcessingUnit.ResetDisplay(e.frameBuffer)
 }
 

@@ -23,7 +23,7 @@ func (c cart) Render() {
 
 var (
 	circle = geom.MakeCircle(8, 8, 4)
-	t      = texture.New(texture.Rect(0, 0, int(circle.Diameter()*2)+1, int(circle.Diameter()*2)+1))
+	t      = texture.New(int(circle.Diameter()*2)+1, int(circle.Diameter()*2)+1)
 )
 
 func main() {

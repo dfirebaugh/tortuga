@@ -30,7 +30,7 @@ func (c cart) Update() {
 }
 
 var s = sprite.Parse("0880088088888888888887888888888888888888088888800088880000088000")
-var heartTexture = texture.New(texture.Rect(0, 0, 8, 8))
+var heartTexture = texture.New(8, 8)
 
 func (c cart) Render() {
 	// setting the background to a different color
