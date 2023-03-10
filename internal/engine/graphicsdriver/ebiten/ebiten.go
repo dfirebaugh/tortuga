@@ -61,12 +61,6 @@ func (g *Game) updateRenderPipeline() {
 
 func (g *Game) renderRenderPipeline(screen *ebiten.Image) {
 	for i, img := range g.Console.GetRenderPipeline() {
-		// if i > len(g.images) {
-		// 	break
-		// }
-		// if img.Coordinate.X == 0 && img.Coordinate.Y == 0 {
-		// 	continue
-		// }
 		op := &ebiten.DrawImageOptions{}
 		eimg := g.images[i]
 		op.GeoM.Translate(img.X, img.Y)
@@ -86,6 +80,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if g.shouldUpdateRenderPipeline() {
 		g.updateRenderPipeline()
 	}
+
 	g.renderDefaultFrameBuffer(screen)
 	g.renderRenderPipeline(screen)
 

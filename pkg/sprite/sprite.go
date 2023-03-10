@@ -255,7 +255,7 @@ func (s Sprite) VerticalMirror(animationIndex int, frameIndex int) []uint8 {
 func DrawPixels(d displayer, pixels []uint8, x float64, y float64) {
 	s := New()
 
-	s.DrawPixels(d, pixels, x+2, y+2)
+	s.DrawPixels(d, pixels, x, y)
 }
 
 func (s Sprite) DrawPixels(d displayer, pixels []uint8, x float64, y float64) {

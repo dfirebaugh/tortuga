@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/dfirebaugh/tortuga/internal/emulator/devices/display"
+	"github.com/dfirebaugh/tortuga/pkg/texture"
 )
 
 type (
@@ -67,5 +68,19 @@ type (
 		displayProvider
 		GetFrame() []byte
 		Render()
+	}
+
+	renderPipeline interface {
+		Append(img *texture.Texture)
+		Get() []*texture.Texture
+		Clear()
+	}
+
+	tileMemory interface {
+		// SetTile sets a tile in memory.
+		//   note that indexX and indexY refer to an index and not a coordinate
+		//   e.g. if your screen width is 8 and your tile size is 2, index can only be 0-3
+		SetTile(indexX, indexY int, pixels []uint8)
+		SetTiles(tileMap map[rune][]uint8, background string)
 	}
 )

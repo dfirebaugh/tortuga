@@ -1,13 +1,18 @@
 package main
 
-import "github.com/dfirebaugh/tortuga"
+import (
+	"github.com/dfirebaugh/tortuga"
+	"github.com/dfirebaugh/tortuga/pkg/math/geom"
+)
 
 type cart struct{}
 
 func (c cart) Update() {
 }
 
-func (c cart) Render() {}
+func (c cart) Render() {
+	geom.MakeRect(0, 0, float64(game.GetScreenWidth()), float64(game.GetScreenHeight())).Filled(game.GetDisplay(), game.Color(2))
+}
 
 var game tortuga.Console
 

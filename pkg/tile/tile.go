@@ -1,7 +1,7 @@
 package tile
 
 import (
-	"github.com/dfirebaugh/tortuga"
+	"github.com/dfirebaugh/tortuga/config"
 	"github.com/dfirebaugh/tortuga/internal/emulator/devices/display"
 	"github.com/dfirebaugh/tortuga/pkg/component"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
@@ -14,10 +14,6 @@ type Tile struct {
 	Width     int
 	PixelSize float64
 }
-
-var (
-	game = tortuga.New()
-)
 
 func Decode(encodedString string) Tile {
 	return Tile{
@@ -35,6 +31,6 @@ func (t Tile) Draw(dsp display.Displayer) {
 			t.PixelSize,
 			t.PixelSize,
 		).
-			Filled(dsp, game.Color(p))
+			Filled(dsp, config.Config.Color(p))
 	}
 }

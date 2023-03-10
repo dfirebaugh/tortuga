@@ -3,6 +3,7 @@ package texture
 import (
 	"image"
 
+	"github.com/dfirebaugh/tortuga/config"
 	"github.com/dfirebaugh/tortuga/pkg/component"
 	"github.com/dfirebaugh/tortuga/pkg/imagefb"
 )
@@ -24,8 +25,13 @@ func New(rect image.Rectangle) *Texture {
 	}
 }
 
-func (i *Texture) SetPix(buffer []byte) {
-	i.Pix = buffer
+func (t *Texture) SetPix(buffer []byte) {
+	for i, pixel := range buffer {
+		t.SetPixel(
+			int16(i%t.Width),
+			int16(i/t.Width),
+			config.NewPalette().RGBA(pixel))
+	}
 }
 
 func (i *Texture) Render() {

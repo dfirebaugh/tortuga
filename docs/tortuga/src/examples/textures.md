@@ -1,3 +1,14 @@
+# Textures
+
+<wasm-view height=400 width=530 src="texture.wasm"></wasm-view>
+
+> you can run this locally with the following command
+
+```
+go run github.com/dfirebaugh/tortuga/examples/texture
+```
+
+```golang
 package main
 
 import (
@@ -36,6 +47,7 @@ func main() {
 	heartTexture.SetPix(s)
 	game.AddToRenderPipeline(heartTexture)
 
+	// note that tiles have a default alpha of 0xFF
 	game.SetTile(10, 20, s)
 	game.SetTile(10, 10, s)
 
@@ -43,3 +55,4 @@ func main() {
 
 	game.Run(cart{})
 }
+```

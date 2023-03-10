@@ -29,7 +29,7 @@ func (i *ImageFB) Put(x, y int16, c uint8) {
 }
 
 func (i *ImageFB) SetPixel(x, y int16, c color.RGBA) {
-	if x <= 0 || x >= int16(i.Width) || y <= 0 || y >= int16(i.Height) {
+	if x < 0 || x > int16(i.Width) || y < 0 || y > int16(i.Height) {
 		return
 	}
 	r, g, b, _ := c.RGBA()

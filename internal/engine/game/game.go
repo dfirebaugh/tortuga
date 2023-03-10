@@ -1,6 +1,8 @@
 package game
 
-import "github.com/dfirebaugh/tortuga/pkg/texture"
+import (
+	"github.com/dfirebaugh/tortuga/pkg/texture"
+)
 
 type Console interface {
 	Update()

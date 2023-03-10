@@ -6,6 +6,8 @@ import (
 	"github.com/dfirebaugh/tortuga/internal/emulator/devices/clock"
 	"github.com/dfirebaugh/tortuga/internal/emulator/devices/dsp"
 	"github.com/dfirebaugh/tortuga/internal/emulator/devices/font"
+	"github.com/dfirebaugh/tortuga/internal/emulator/devices/renderpipeline"
+	"github.com/dfirebaugh/tortuga/internal/emulator/devices/tilememory"
 	"github.com/dfirebaugh/tortuga/internal/engine"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 	"github.com/dfirebaugh/tortuga/pkg/texture"
@@ -34,12 +36,15 @@ func (c Console) Run(cart Cart) {
 func New() Console {
 	p := config.NewPalette()
 	display := texture.New(texture.Rect(0, 0, config.Config.GetScreenWidth(), config.Config.GetScreenHeight()))
+	rp := &renderpipeline.RenderPipeline{}
 	console := Console{
 		emulator.New(
 			font.New(display, p, &proggy.TinySZ8pt7b),
 			clock.New(),
 			&dsp.DSP{},
 			display,
+			tilememory.TileMemory{RenderPipeline: rp},
+			rp,
 		)}
 	return console
 }

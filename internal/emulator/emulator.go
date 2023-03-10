@@ -12,20 +12,20 @@ type Emulator struct {
 	dsp
 	frameBuffer
 	configuration
-	renderPipeline []*texture.Texture
-	deprecated
+	renderPipeline renderPipeline
+	tileMemory
 }
 
-func New(fp fontProcessingUnit, clock clock, dsp dsp, frameBuffer frameBuffer) *Emulator {
-	e := &Emulator{
+func New(fp fontProcessingUnit, clock clock, dsp dsp, frameBuffer frameBuffer, tileMemory tileMemory, rp renderPipeline) *Emulator {
+	return &Emulator{
 		fontProcessingUnit: fp,
 		clock:              clock,
 		dsp:                dsp,
 		frameBuffer:        frameBuffer,
 		configuration:      config.Config,
+		tileMemory:         tileMemory,
+		renderPipeline:     rp,
 	}
-
-	return e
 }
 
 func (e *Emulator) LoadCart(c cart) {
@@ -41,19 +41,15 @@ func (e Emulator) Render() {
 	e.frameBuffer.Render()
 }
 
-// AddToRenderPipeline allows you to push images into a queue that will be rendered
-//
-//	This is more efficient than rendering directly to the frame buffer
-func (e *Emulator) AddToRenderPipeline(img *texture.Texture) {
-	e.renderPipeline = append(e.renderPipeline, img)
-}
-
 func (e Emulator) GetRenderPipeline() []*texture.Texture {
-	return e.renderPipeline
+	return e.renderPipeline.Get()
 }
 
-func (e *Emulator) ClearRenderPipeline() {
-	e.renderPipeline = make([]*texture.Texture, 0)
+func (e Emulator) AddToRenderPipeline(t *texture.Texture) {
+	e.renderPipeline.Append(t)
+}
+func (e Emulator) ClearRenderPipeline() {
+	e.renderPipeline.Clear()
 }
 
 func (e *Emulator) SetScreenHeight(v int) {

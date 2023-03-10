@@ -17,7 +17,7 @@ func (p Palette) GetColor(i uint8) color.Color {
 }
 
 func (p Palette) RGBA(i uint8) color.RGBA {
-	r, g, b, _ := p[i].RGBA()
+	r, g, b, _ := p.GetColor(i).RGBA()
 
 	return color.RGBA{
 		R: uint8(r),
