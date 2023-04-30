@@ -14,3 +14,27 @@ type Console interface {
 type Game interface {
 	Run()
 }
+
+type GamePad interface {
+	IsUpPressed() bool
+	IsUpJustPressed() bool
+	IsDownPressed() bool
+	IsDownJustPressed() bool
+	IsLeftPressed() bool
+	IsLeftJustPressed() bool
+	IsRightPressed() bool
+	IsRightJustPressed() bool
+	IsPrimaryPressed() bool
+	IsSecondaryPressed() bool
+	IsPrimaryJustPressed() bool
+	IsSecondaryJustPressed() bool
+}
+
+type Mouse interface {
+	CursorPosition() (int, int)
+	CursorPositionFloat() (float64, float64)
+	IsLeftClickPressed() bool
+	IsRightClickPressed() bool
+	IsLeftClickJustPressed() bool
+	IsRightClickJustPressed() bool
+}

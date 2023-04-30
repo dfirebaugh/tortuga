@@ -2,12 +2,10 @@ package main
 
 import (
 	"github.com/dfirebaugh/tortuga"
-	"github.com/dfirebaugh/tortuga/pkg/input"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 )
 
 type cart struct {
-	input input.PlayerInput
 }
 
 var (
@@ -15,7 +13,7 @@ var (
 	rect = geom.MakeRect(float64(game.GetScreenWidth()/2-20), float64(game.GetScreenHeight()/2-20), 40, 40)
 	ray  = geom.Ray{
 		Origin:    geom.MakeVector(60, 60),
-		Direction: geom.MakeVector(input.CursorPositionFloat()),
+		Direction: geom.MakeVector(game.CursorPositionFloat()),
 	}
 	collision = &geom.Collision{}
 )
@@ -44,17 +42,17 @@ func (c cart) Render() {
 }
 
 func (c cart) Update() {
-	ray.Direction = geom.MakeVector(input.CursorPositionFloat())
-	if c.input.IsDownPressed() {
+	ray.Direction = geom.MakeVector(game.CursorPositionFloat())
+	if game.IsDownPressed() {
 		rect[1] += 5
 	}
-	if c.input.IsUpPressed() {
+	if game.IsUpPressed() {
 		rect[1] -= 5
 	}
-	if c.input.IsLeftPressed() {
+	if game.IsLeftPressed() {
 		rect[0] -= 5
 	}
-	if c.input.IsRightPressed() {
+	if game.IsRightPressed() {
 		rect[0] += 5
 	}
 }
@@ -72,7 +70,5 @@ func renderRay() {
 }
 
 func main() {
-	game.Run(cart{
-		input: input.Keyboard{},
-	})
+	game.Run(cart{})
 }

@@ -6,7 +6,6 @@ import (
 	"github.com/dfirebaugh/tortuga"
 	"github.com/dfirebaugh/tortuga/examples/sfx/bar"
 	"github.com/dfirebaugh/tortuga/pkg/component"
-	"github.com/dfirebaugh/tortuga/pkg/input"
 )
 
 type Steps struct {
@@ -36,8 +35,7 @@ func (s *Steps) Update() {
 		b.Update()
 	}
 
-	keyboard := input.Keyboard{}
-	if keyboard.IsDownJustPressed() {
+	if s.game.IsDownJustPressed() {
 		go func(samples []*bar.Bar) {
 			sequence := []float32{}
 			for _, f := range samples {

@@ -1,4 +1,4 @@
-package window
+package gl
 
 import (
 	"log"

@@ -9,6 +9,7 @@ import (
 	"github.com/dfirebaugh/tortuga/internal/emulator/devices/renderpipeline"
 	"github.com/dfirebaugh/tortuga/internal/emulator/devices/tilememory"
 	"github.com/dfirebaugh/tortuga/internal/engine"
+	"github.com/dfirebaugh/tortuga/internal/engine/game"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 	"github.com/dfirebaugh/tortuga/pkg/texture"
 	"tinygo.org/x/tinyfont/proggy"
@@ -26,11 +27,14 @@ type Cart interface {
 // Console represents a game system - aka a game console
 type Console struct {
 	*emulator.Emulator
+	game.GamePad
+	game.Mouse
 }
 
 func (c Console) Run(cart Cart) {
 	c.LoadCart(cart)
-	engine.New(c).Run()
+	e := engine.New(c)
+	e.Run()
 }
 
 func New() Console {
@@ -45,7 +49,10 @@ func New() Console {
 			display,
 			tilememory.TileMemory{RenderPipeline: rp},
 			rp,
-		)}
+		),
+		engine.GamePad(),
+		engine.Mouse(),
+	}
 	return console
 }
 

@@ -4,12 +4,10 @@ import (
 	"time"
 
 	"github.com/dfirebaugh/tortuga"
-	"github.com/dfirebaugh/tortuga/pkg/input"
 )
 
 type cart struct {
-	input input.PlayerInput
-	game  tortuga.Console
+	game tortuga.Console
 }
 
 var (
@@ -77,12 +75,12 @@ var (
 )
 
 func (c cart) Update() {
-	if c.input.IsDownJustPressed() {
+	if c.game.IsDownJustPressed() {
 		go func() {
 			c.game.PlayNotes(ode, time.Millisecond*550)
 		}()
 	}
-	if c.input.IsUpJustPressed() {
+	if c.game.IsUpJustPressed() {
 		go func() {
 			c.game.PlaySequence(happy, time.Millisecond*250)
 		}()
@@ -97,7 +95,6 @@ func (c cart) Render() {
 func main() {
 	game := tortuga.New()
 	game.Run(cart{
-		input: input.Keyboard{},
-		game:  game,
+		game: game,
 	})
 }

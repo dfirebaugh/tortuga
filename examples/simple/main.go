@@ -2,12 +2,11 @@ package main
 
 import (
 	"github.com/dfirebaugh/tortuga"
-	"github.com/dfirebaugh/tortuga/pkg/input"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 )
 
 type cart struct {
-	input input.PlayerInput
+	tortuga.Console
 }
 
 var (
@@ -17,16 +16,16 @@ var (
 )
 
 func (c cart) Update() {
-	if c.input.IsDownPressed() {
+	if c.IsDownPressed() {
 		rect[1] += speed
 	}
-	if c.input.IsUpPressed() {
+	if c.IsUpPressed() {
 		rect[1] -= speed
 	}
-	if c.input.IsLeftPressed() {
+	if c.IsLeftPressed() {
 		rect[0] -= speed
 	}
-	if c.input.IsRightPressed() {
+	if c.IsRightPressed() {
 		rect[0] += speed
 	}
 }
@@ -47,7 +46,5 @@ func main() {
 	game = tortuga.New()
 
 	// run the cart (note: this is a blocking operation)
-	game.Run(cart{
-		input: input.Keyboard{},
-	})
+	game.Run(cart{game})
 }

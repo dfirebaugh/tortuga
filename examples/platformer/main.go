@@ -9,7 +9,6 @@ import (
 	"github.com/dfirebaugh/tortuga/examples/platformer/heart"
 	"github.com/dfirebaugh/tortuga/examples/platformer/player"
 	"github.com/dfirebaugh/tortuga/pkg/entity"
-	"github.com/dfirebaugh/tortuga/pkg/input"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 	"github.com/dfirebaugh/tortuga/pkg/sprite"
 )
@@ -41,7 +40,7 @@ func (c cart) Render() {
 }
 
 func initPlayer(s sprite.Sprite) {
-	player1 = player.New(game, input.Keyboard{}, s, getPlayerCollidables())
+	player1 = player.New(game, s, getPlayerCollidables())
 }
 
 func getPlayerCollidables() []geom.Rect {

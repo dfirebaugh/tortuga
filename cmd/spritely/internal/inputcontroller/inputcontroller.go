@@ -1,16 +1,17 @@
 package inputcontroller
 
 import (
+	"github.com/dfirebaugh/tortuga"
 	"github.com/dfirebaugh/tortuga/cmd/spritely/internal/topic"
 	"github.com/dfirebaugh/tortuga/cmd/spritely/internal/widget"
 	"github.com/dfirebaugh/tortuga/pkg/component"
-	"github.com/dfirebaugh/tortuga/pkg/input"
 	"github.com/dfirebaugh/tortuga/pkg/message"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
 type InputController struct {
+	Game       tortuga.Console
 	Widgets    []widget.Widget
 	MessageBus message.MessageBus
 }
@@ -18,8 +19,8 @@ type InputController struct {
 func (i InputController) Render() {}
 
 func (i InputController) Update() {
-	if input.IsLeftClickPressed() {
-		x, y := input.CursorPositionFloat()
+	if i.Game.IsLeftClickPressed() {
+		x, y := i.Game.CursorPositionFloat()
 		coord := component.Coordinate{
 			X: x,
 			Y: y,
@@ -32,8 +33,8 @@ func (i InputController) Update() {
 			w.SelectElement(coord)
 		}
 	}
-	if input.IsRightClickPressed() {
-		x, y := input.CursorPositionFloat()
+	if i.Game.IsRightClickPressed() {
+		x, y := i.Game.CursorPositionFloat()
 		coord := component.Coordinate{
 			X: x,
 			Y: y,

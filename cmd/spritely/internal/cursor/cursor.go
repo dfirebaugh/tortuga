@@ -4,7 +4,6 @@ import (
 	"github.com/dfirebaugh/tortuga"
 	"github.com/dfirebaugh/tortuga/cmd/spritely/internal/topic"
 	"github.com/dfirebaugh/tortuga/pkg/component"
-	"github.com/dfirebaugh/tortuga/pkg/input"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 	"github.com/dfirebaugh/tortuga/pkg/message"
 )
@@ -17,7 +16,7 @@ type Cursor struct {
 }
 
 func (c Cursor) Render() {
-	x, y := input.CursorPosition()
+	x, y := c.Game.CursorPosition()
 	geom.MakeRect(float64(x), float64(y), 5, 5).Filled(c.Game.GetDisplay(), c.Game.Color(c.Color))
 }
 func (c Cursor) Update() {}

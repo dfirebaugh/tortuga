@@ -5,7 +5,6 @@ import (
 
 	"github.com/dfirebaugh/tortuga"
 	"github.com/dfirebaugh/tortuga/examples/dynamicball/ball"
-	"github.com/dfirebaugh/tortuga/pkg/input"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 )
 
@@ -18,12 +17,12 @@ var (
 )
 
 func (c cart) Update() {
-	if input.IsLeftClickPressed() {
-		x, y := input.CursorPositionFloat()
+	if game.IsLeftClickPressed() {
+		x, y := game.CursorPositionFloat()
 		generateBallsAt(1, x, y)
 	}
 
-	if input.IsRightClickPressed() {
+	if game.IsRightClickPressed() {
 		balls = []*ball.Ball{}
 	}
 	for _, ball := range balls {

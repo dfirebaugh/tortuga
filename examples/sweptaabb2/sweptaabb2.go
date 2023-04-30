@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/dfirebaugh/tortuga"
 	"github.com/dfirebaugh/tortuga/pkg/component"
-	"github.com/dfirebaugh/tortuga/pkg/input"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 )
 
@@ -11,8 +10,8 @@ type cart struct {
 }
 
 type player struct {
+	game tortuga.Console
 	component.Velocity
-	input input.PlayerInput
 	rect  geom.Rect
 	speed float64
 }
@@ -21,7 +20,6 @@ var (
 	playerRect = &player{
 		rect:  geom.MakeRect(float64(game.GetScreenWidth()/2-20), float64(game.GetScreenHeight()/2-20), 40, 40),
 		speed: 3,
-		input: input.Keyboard{},
 	}
 	game      = tortuga.New()
 	rects     = []geom.Rect{}
@@ -74,16 +72,16 @@ func (p *player) render() {
 func (p *player) update() {
 	p.clampVelocity()
 	p.diminishVelocity()
-	if p.input.IsDownPressed() {
+	if p.game.IsDownPressed() {
 		playerRect.VY += playerRect.speed
 	}
-	if p.input.IsUpPressed() {
+	if p.game.IsUpPressed() {
 		playerRect.VY -= playerRect.speed
 	}
-	if p.input.IsLeftPressed() {
+	if p.game.IsLeftPressed() {
 		playerRect.VX -= playerRect.speed
 	}
-	if p.input.IsRightPressed() {
+	if p.game.IsRightPressed() {
 		playerRect.VX += playerRect.speed
 	}
 	p.rect[0] += p.VX

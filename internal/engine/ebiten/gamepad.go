@@ -1,7 +1,7 @@
-package input
+package ebiten
 
 import (
-	"github.com/hajimehoshi/ebiten/v2"
+	ebiten "github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
@@ -42,4 +42,28 @@ func (Keyboard) IsPrimaryJustPressed() bool {
 }
 func (Keyboard) IsSecondaryJustPressed() bool {
 	return inpututil.IsKeyJustPressed(ebiten.KeyX)
+}
+
+type Mouse struct{}
+
+func (m Mouse) CursorPosition() (int, int) {
+	return ebiten.CursorPosition()
+}
+
+func (m Mouse) CursorPositionFloat() (float64, float64) {
+	x, y := ebiten.CursorPosition()
+	return float64(x), float64(y)
+}
+
+func (m Mouse) IsLeftClickPressed() bool {
+	return ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft)
+}
+func (m Mouse) IsRightClickPressed() bool {
+	return ebiten.IsMouseButtonPressed(ebiten.MouseButtonRight)
+}
+func (m Mouse) IsLeftClickJustPressed() bool {
+	return inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft)
+}
+func (m Mouse) IsRightClickJustPressed() bool {
+	return inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonRight)
 }

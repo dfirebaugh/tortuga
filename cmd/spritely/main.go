@@ -118,6 +118,7 @@ func initEntities(game tortuga.Console) []entity.Entity {
 		}
 	}
 	inputController := inputcontroller.InputController{
+		Game:       game,
 		Widgets:    widgets,
 		MessageBus: b,
 	}

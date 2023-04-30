@@ -6,7 +6,6 @@ import (
 	"github.com/dfirebaugh/tortuga"
 	"github.com/dfirebaugh/tortuga/examples/platformer/consumable"
 	"github.com/dfirebaugh/tortuga/pkg/component"
-	"github.com/dfirebaugh/tortuga/pkg/input"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 	"github.com/dfirebaugh/tortuga/pkg/sprite"
 )
@@ -17,7 +16,6 @@ type player struct {
 	sprite.Sprite
 	hitbox      geom.Rect
 	speed       float64
-	input       input.PlayerInput
 	game        tortuga.Console
 	collidables []geom.Rect
 	jumpCount   int
@@ -33,9 +31,8 @@ const (
 	damping = .1
 )
 
-func New(game tortuga.Console, input input.PlayerInput, s sprite.Sprite, collidables []geom.Rect) *player {
+func New(game tortuga.Console, s sprite.Sprite, collidables []geom.Rect) *player {
 	p := &player{
-		input:       input,
 		game:        game,
 		speed:       .3,
 		hitbox:      geom.MakeRect(0, 0, float64(8), float64(16)),
@@ -49,7 +46,7 @@ func New(game tortuga.Console, input input.PlayerInput, s sprite.Sprite, collida
 
 func (p *player) Render() {
 	p.hitbox.Draw(p.game.GetDisplay(), p.game.Color(1))
-	if p.input.IsLeftPressed() {
+	if p.game.IsLeftPressed() {
 		p.DrawPixels(p.game.GetDisplay(), p.GetPixels(0, 0), p.X, p.Y)
 		return
 	}
@@ -112,10 +109,10 @@ func (p *player) Update() {
 	p.clampVelocity()
 	p.diminishVelocity()
 
-	if p.input.IsDownPressed() {
+	if p.game.IsDownPressed() {
 		p.VX += p.speed
 	}
-	if p.input.IsPrimaryJustPressed() {
+	if p.game.IsPrimaryJustPressed() {
 		if p.jumpCount < 3 {
 			tmpGrav := gravity
 			gravity = 0
@@ -124,10 +121,10 @@ func (p *player) Update() {
 			gravity = tmpGrav
 		}
 	}
-	if p.input.IsLeftPressed() {
+	if p.game.IsLeftPressed() {
 		p.VX -= p.speed
 	}
-	if p.input.IsRightPressed() {
+	if p.game.IsRightPressed() {
 		p.VX += p.speed
 	}
 	p.hitbox[0] = p.X + p.VX
@@ -161,7 +158,7 @@ func (p *player) applyGravity() {
 		p.VY = 0
 		return
 	}
-	if p.input.IsPrimaryJustPressed() {
+	if p.game.IsPrimaryJustPressed() {
 		return
 	}
 	p.Y += float64(gravity)

@@ -3,7 +3,6 @@ package bar
 import (
 	"github.com/dfirebaugh/tortuga"
 	"github.com/dfirebaugh/tortuga/pkg/component"
-	"github.com/dfirebaugh/tortuga/pkg/input"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 )
 
@@ -51,8 +50,8 @@ func (b *Bar) GetValue() float64 {
 }
 
 func (b *Bar) HandleDrag() {
-	if input.IsLeftClickPressed() {
-		x, y := input.CursorPositionFloat()
+	if b.Game.IsLeftClickPressed() {
+		x, y := b.Game.CursorPositionFloat()
 		if !b.IsWithinBounds(component.Coordinate{X: x, Y: y}) {
 			return
 		}
@@ -65,8 +64,8 @@ func (b *Bar) HandleDrag() {
 		}
 	}
 
-	if input.IsRightClickPressed() {
-		x, y := input.CursorPositionFloat()
+	if b.Game.IsRightClickPressed() {
+		x, y := b.Game.CursorPositionFloat()
 		if !b.IsWithinBounds(component.Coordinate{X: x, Y: y}) {
 			return
 		}

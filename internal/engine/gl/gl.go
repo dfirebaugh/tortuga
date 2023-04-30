@@ -8,7 +8,6 @@ import (
 
 	"github.com/dfirebaugh/tortuga/config"
 	"github.com/dfirebaugh/tortuga/internal/engine/game"
-	"github.com/dfirebaugh/tortuga/internal/engine/graphicsdriver/gl/window"
 
 	"github.com/disintegration/imaging"
 	"github.com/go-gl/gl/v4.1-core/gl"
@@ -46,15 +45,15 @@ func New(emulator game.Console) game.Game {
 }
 
 func (g *Game) Run() {
-	win := window.InitGLFW()
-	defer window.Terminate()
+	win := InitGLFW()
+	defer Terminate()
 
 	if win == nil {
 		return
 	}
 
-	window.InitGL()
-	window.InitFrameBuffer()
+	InitGL()
+	InitFrameBuffer()
 
 	for !win.ShouldClose() {
 		g.render(win)
@@ -77,7 +76,7 @@ func (g *Game) render(win *glfw.Window) {
 	// gl.UseProgram(prog)
 	w, h := win.GetSize()
 	g.Console.Render()
-	gl.BindTexture(gl.TEXTURE_2D, window.Texture)
+	gl.BindTexture(gl.TEXTURE_2D, Texture)
 
 	// Set the expected size that you want:
 	// Resize:

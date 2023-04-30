@@ -6,7 +6,6 @@ import (
 
 	"github.com/dfirebaugh/tortuga"
 	"github.com/dfirebaugh/tortuga/examples/imgballs/ball"
-	"github.com/dfirebaugh/tortuga/pkg/input"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 )
 
@@ -19,15 +18,15 @@ var (
 )
 
 func (c cart) Update() {
-	if input.IsLeftClickPressed() {
-		x, y := input.CursorPositionFloat()
+	if game.IsLeftClickPressed() {
+		x, y := game.CursorPositionFloat()
 		if x == 0 && y == 0 {
 			return
 		}
 		generateBallsAt(1, x, y)
 	}
 
-	if input.IsRightClickPressed() {
+	if game.IsRightClickPressed() {
 		balls = []*ball.Ball{}
 		game.ClearRenderPipeline()
 	}
@@ -41,7 +40,7 @@ func (c cart) Render() {
 	for _, ball := range balls {
 		ball.Render()
 	}
-	x, y := input.CursorPositionFloat()
+	x, y := game.CursorPositionFloat()
 	game.PrintAt(fmt.Sprintf("%d, %d", int(x), int(y)), 20, 30, 12)
 }
 

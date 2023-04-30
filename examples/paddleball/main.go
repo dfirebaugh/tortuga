@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/dfirebaugh/tortuga"
 	"github.com/dfirebaugh/tortuga/pkg/component"
-	"github.com/dfirebaugh/tortuga/pkg/input"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 )
 
@@ -127,24 +126,23 @@ type mover interface {
 }
 
 type playerMover struct {
-	input input.Keyboard
-	Game  tortuga.Console
+	Game tortuga.Console
 }
 type enemyMover struct {
 	Game tortuga.Console
 }
 
 func (p playerMover) Move(paddlePosition component.Coordinate, ballPosition component.Coordinate, speed float64) (x float64, y float64) {
-	if p.input.IsDownPressed() {
+	if p.Game.IsDownPressed() {
 		return 0, speed
 	}
-	if p.input.IsUpPressed() {
+	if p.Game.IsUpPressed() {
 		return 0, -speed
 	}
-	if p.input.IsLeftPressed() {
+	if p.Game.IsLeftPressed() {
 		return -speed, 0
 	}
-	if p.input.IsRightPressed() {
+	if p.Game.IsRightPressed() {
 		return speed, 0
 	}
 	return 0, 0
