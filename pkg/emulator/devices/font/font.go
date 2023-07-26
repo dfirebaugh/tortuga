@@ -3,7 +3,7 @@ package font
 import (
 	"image/color"
 
-	"github.com/dfirebaugh/tortuga/internal/emulator/devices/display"
+	"github.com/dfirebaugh/tortuga/pkg/emulator/devices/display"
 	"golang.org/x/image/colornames"
 	"tinygo.org/x/tinyfont"
 )

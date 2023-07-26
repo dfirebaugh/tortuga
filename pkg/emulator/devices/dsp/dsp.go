@@ -4,8 +4,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dfirebaugh/tortuga/internal/emulator/devices/dsp/note"
-	"github.com/dfirebaugh/tortuga/internal/emulator/devices/dsp/stream"
+	"github.com/dfirebaugh/tortuga/pkg/emulator/devices/dsp/note"
+	"github.com/dfirebaugh/tortuga/pkg/emulator/devices/dsp/stream"
 	"github.com/hajimehoshi/ebiten/v2/audio"
 )
 
@@ -32,7 +32,7 @@ func (d *DSP) PlayNote(freq float32, duration time.Duration) {
 		time.Sleep(duration)
 		return
 	}
-	p, _ := d.audioContext.NewPlayer(stream.New(d.audioContext.SampleRate(), freq))
+	p, _ := d.audioContext.NewPlayer(stream.New(d.audioContext.SampleRate(), freq, 15, 15))
 	p.SetVolume(0.05)
 
 	p.Play()

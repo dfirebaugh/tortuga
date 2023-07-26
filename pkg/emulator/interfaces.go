@@ -4,7 +4,7 @@ import (
 	"image/color"
 	"time"
 
-	"github.com/dfirebaugh/tortuga/internal/emulator/devices/display"
+	"github.com/dfirebaugh/tortuga/pkg/emulator/devices/display"
 	"github.com/dfirebaugh/tortuga/pkg/texture"
 )
 

@@ -25,3 +25,4 @@
 - [sfx](./examples/sfx.md)
 - [tone](./examples/tone.md)
 - [sequence](./examples/sequence.md)
+- [spectrum](./examples/spectrum.md)

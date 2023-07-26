@@ -4,7 +4,7 @@ import (
 	"image/color"
 
 	"github.com/dfirebaugh/tortuga/config"
-	"github.com/dfirebaugh/tortuga/internal/emulator/devices/display"
+	"github.com/dfirebaugh/tortuga/pkg/emulator/devices/display"
 )
 
 type graphicsBuffer [][3]uint8
@@ -70,21 +70,34 @@ func (i *ImageFB) GetFrame() []byte {
 			if i.Width*y+x >= len(i.buffer) {
 				continue
 			}
-			el := i.buffer[i.Width*y+x]
+			clr := i.buffer[i.Width*y+x]
 
 			r, g, b, _ := config.Config.GetTransparentColor().RGBA()
-			if el[0] == uint8(r) && el[1] == uint8(g) && el[2] == uint8(b) {
+			if clr[0] == uint8(r) && clr[1] == uint8(g) && clr[2] == uint8(b) {
 				frame = i.fillTransparent(frame)
 				continue
 			}
-			frame = append(frame, el[0])
-			frame = append(frame, el[1])
-			frame = append(frame, el[2])
+			frame = append(frame, clr[0])
+			frame = append(frame, clr[1])
+			frame = append(frame, clr[2])
 			frame = append(frame, i.Alpha)
 		}
 	}
 
 	return frame
+}
+
+func (i *ImageFB) ToPixels() []color.RGBA {
+	pixels := make([]color.RGBA, len(i.buffer))
+	for idx, clr := range i.buffer {
+		pixels[idx] = color.RGBA{
+			R: clr[0],
+			G: clr[1],
+			B: clr[2],
+			A: i.Alpha,
+		}
+	}
+	return pixels
 }
 
 func (i *ImageFB) GetDisplay() display.Displayer {

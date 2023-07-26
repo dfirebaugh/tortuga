@@ -10,7 +10,7 @@ import (
 	"syscall"
 
 	"github.com/dfirebaugh/tortuga/config"
-	"github.com/dfirebaugh/tortuga/internal/engine/game"
+	"github.com/dfirebaugh/tortuga/pkg/engine/game"
 	ebiten "github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"golang.org/x/image/colornames"

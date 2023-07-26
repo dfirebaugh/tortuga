@@ -4,7 +4,7 @@ import (
 	"image/color"
 
 	"github.com/dfirebaugh/tortuga/config"
-	"github.com/dfirebaugh/tortuga/internal/engine/game"
+	"github.com/dfirebaugh/tortuga/pkg/engine/game"
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 

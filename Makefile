@@ -9,5 +9,10 @@ serve-docs:
 deploy-docs:
 	bash ./scripts/deploy_docs.sh
 
+
+.PHONY: run-example
+run-example:
+	go run ./examples/$(DIR)
+
 clean:
 	rm -rf bin .dist

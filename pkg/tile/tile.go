@@ -2,8 +2,8 @@ package tile
 
 import (
 	"github.com/dfirebaugh/tortuga/config"
-	"github.com/dfirebaugh/tortuga/internal/emulator/devices/display"
 	"github.com/dfirebaugh/tortuga/pkg/component"
+	"github.com/dfirebaugh/tortuga/pkg/emulator/devices/display"
 	"github.com/dfirebaugh/tortuga/pkg/math/geom"
 	"github.com/dfirebaugh/tortuga/pkg/sprite"
 )

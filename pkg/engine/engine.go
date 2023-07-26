@@ -1,8 +1,8 @@
 package engine
 
 import (
-	"github.com/dfirebaugh/tortuga/internal/engine/ebiten"
-	"github.com/dfirebaugh/tortuga/internal/engine/game"
+	"github.com/dfirebaugh/tortuga/pkg/engine/ebiten"
+	"github.com/dfirebaugh/tortuga/pkg/engine/game"
 )
 
 func New(emulator game.Console) game.Game {

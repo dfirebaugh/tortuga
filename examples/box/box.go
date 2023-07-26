@@ -28,17 +28,17 @@ type box struct {
 	color color.Color
 }
 
-func NewBox(world *box2d.B2World, x, y float64, density float64, friction float64, c color.Color) *box {
+func NewBox(world *box2d.B2World, x, y, w, h float64, density float64, friction float64, c color.Color) *box {
 	boxBodyDef := box2d.MakeB2BodyDef()
 	boxBodyDef.Type = box2d.B2BodyType.B2_dynamicBody
 	boxBodyDef.Position.Set(x, y)
 
 	boxShape := box2d.MakeB2PolygonShape()
-	boxShape.SetAsBox(1, 1)
+	boxShape.SetAsBox(w, h)
 	boxFixtureDef := box2d.MakeB2FixtureDef()
 	boxFixtureDef.Shape = &boxShape
-	boxFixtureDef.Density = 1
-	boxFixtureDef.Friction = .3
+	boxFixtureDef.Density = density
+	boxFixtureDef.Friction = friction
 
 	b := &box{
 		world.CreateBody(&boxBodyDef),
@@ -123,18 +123,9 @@ func (b boundary) Render() {
 }
 
 var count = 0
-var trigger = false
 
 func (c *cart) Update() {
 	c.world.Step(1.0/60.0, 8, 3)
-	if game.GamePad.IsDownJustPressed() {
-		trigger = true
-	}
-
-	if !trigger {
-		return
-	}
-
 	if count == 1000 {
 		return
 	}
@@ -146,6 +137,8 @@ func (c *cart) Update() {
 		c.world,
 		centerX,
 		topY,
+		1,
+		1,
 		1,
 		.3,
 		game.Color(uint8(count%len(game.GetPalette()))),
@@ -177,9 +170,9 @@ func main() {
 	)
 	left := NewBoundary(
 		&world,
-		(float64(game.GetScreenWidth())/pixelPerMeter)/3,
+		((float64(game.GetScreenWidth()) / pixelPerMeter) / 3),
 		float64(game.GetScreenHeight())/pixelPerMeter,
-		1,
+		2,
 		float64(game.GetScreenHeight())/pixelPerMeter,
 		game.Color(3),
 	)
@@ -187,7 +180,7 @@ func main() {
 		&world,
 		((float64(game.GetScreenWidth())/pixelPerMeter)/3)*2,
 		float64(game.GetScreenHeight())/pixelPerMeter,
-		1,
+		2,
 		float64(game.GetScreenHeight())/pixelPerMeter,
 		game.Color(3),
 	)
