@@ -7,7 +7,7 @@ You will have to provide a [wad file](../assets/wad.md) and a key for which tile
 e.g.
 
 ```bash
-go run github.com/dfirebaugh/tortuga/cmd/mapviewer -wad ./cmd/mapviewer/examples/game.wad -key tiles
+go run github.com/dfirebaugh/tortuga/cmd/mapviewer@latest -wad ./cmd/mapviewer/examples/game.wad -key tiles
 ```
 
 The wad file will need relative paths to any assets required.
